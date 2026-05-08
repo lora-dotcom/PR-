@@ -1,12 +1,11 @@
 
-<!-- saved from url=(0099)file:///C:/Users/28025/Downloads/Dashboard_%E5%8F%AA%E8%AF%BB%E6%B1%87%E6%8A%A5%E7%89%88%20(4).html -->
-<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aecooly · PR Dashboard 2026</title>
-<script src="./Aecooly · PR Dashboard 2026_files/lucide.min.js.下载"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./Aecooly · PR Dashboard 2026_files/css2" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f5f4f1;
@@ -33,8 +32,22 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text1);font-size:13px;line-height:1.5;padding-top:var(--toolbar-h)}
 
-/* TOOLBAR */
-#toolbar{position:fixed;top:0;left:0;right:0;height:var(--toolbar-h);background:rgba(245,244,241,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border2);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px}
+/* PAGE HEADER (always visible) */
+#page-header{position:fixed;top:0;left:0;right:0;height:56px;background:var(--surface);border-bottom:0.5px solid var(--border2);z-index:1001;display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:16px}
+.hd-left{display:flex;align-items:center;gap:10px;flex:1}
+.hd-logo{width:30px;height:30px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;letter-spacing:-.5px;flex-shrink:0}
+.hd-title{font-size:13px;font-weight:600;color:var(--text1);letter-spacing:-.2px}
+.hd-sub{font-size:10px;color:var(--text3);margin-top:1px;letter-spacing:.2px}
+.hd-mid{flex-shrink:0}
+.hd-right{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.hd-week{font-size:12px;font-weight:500;color:var(--text1);font-family:var(--mono)}
+.hd-tag{font-size:10px;color:var(--text3);letter-spacing:.3px}
+
+/* TOOLBAR (edit mode, below header) */
+#toolbar{position:fixed;top:56px;left:0;right:0;height:40px;background:rgba(245,244,241,.92);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);z-index:1000;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;gap:6px}
+body.readonly #toolbar{display:none!important}
+body{padding-top:calc(56px + 40px)}
+body.readonly{padding-top:56px}
 .tb-brand{font-size:13px;font-weight:600;letter-spacing:-.3px;color:var(--text1);white-space:nowrap}
 .tb-brand span{color:var(--green)}
 .tb-actions{display:flex;align-items:center;gap:6px}
@@ -216,13 +229,13 @@ body.readonly .add-card-btn{display:none!important}
 body.readonly .link-btn{display:none!important}
 body.readonly .guide-add-btn{display:none!important}
 body.readonly .del-col-btn{display:none!important}
-body.readonly{padding-top:0!important}
+body.readonly{padding-top:56px!important}
 
 /* EDIT TOOLBAR */
-#edit-toolbar{position:fixed;top:var(--toolbar-h);left:0;right:0;height:40px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);z-index:999;display:flex;align-items:center;padding:0 16px;gap:8px;transition:opacity .15s}
+#edit-toolbar{position:fixed;top:calc(56px + 40px);left:0;right:0;height:38px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--border);z-index:999;display:flex;align-items:center;padding:0 16px;gap:8px;transition:opacity .15s}
 body.readonly #edit-toolbar{display:none}
-body{padding-top:calc(var(--toolbar-h) + 40px)}
-body.readonly{padding-top:0}
+body{padding-top:calc(56px + 40px + 38px)}
+body.readonly{padding-top:56px}
 .etb-group{display:flex;align-items:center;gap:3px}
 .etb-sep{width:0.5px;height:20px;background:var(--border2);margin:0 4px}
 .etb-btn{padding:3px 8px;border-radius:4px;border:0.5px solid var(--border);background:transparent;font-family:var(--font);font-size:12px;color:var(--text1);cursor:pointer;transition:.1s;white-space:nowrap}
@@ -245,18 +258,32 @@ body:not(.readonly) .add-card-btn{display:block}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--text1);color:#fff;padding:10px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:500;z-index:3000;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.show{opacity:1}
 </style>
-<style>#toolbar,#edit-toolbar{display:none!important}body{padding-top:0!important}.add-card-btn,.guide-add-btn,.link-btn,.del-col-btn{display:none!important}[contenteditable]{pointer-events:none!important;cursor:default!important}.media-name[data-href]{pointer-events:auto!important;cursor:pointer!important;color:#1f5c38}</style></head>
+<style>#toolbar,#edit-toolbar{display:none!important}body{padding-top:56px!important}.add-card-btn,.guide-add-btn,.link-btn,.del-col-btn{display:none!important}[contenteditable]{pointer-events:none!important;cursor:default!important}.media-name[data-href]{pointer-events:auto!important;cursor:pointer!important;color:#1f5c38}.mkt-btn{pointer-events:auto!important;cursor:pointer!important}</style></head>
 <body>
 
-<!-- TOOLBAR -->
-<div id="toolbar">
-  <div class="tb-brand">Aecooly · <span>PR Dashboard</span> 2026</div>
-  <div style="display:flex;align-items:center;gap:8px;flex:1;justify-content:center">
-    <div class="mkt-switch">
-      <button class="mkt-btn active" onclick="switchMkt(&#39;global&#39;)">🌐 全球市场</button>
-      <button class="mkt-btn" onclick="switchMkt(&#39;jp&#39;)">🇯🇵 日本市场</button>
+<!-- HEADER (always visible, both edit and readonly) -->
+<div id="page-header">
+  <div class="hd-left">
+    <div class="hd-logo">AC</div>
+    <div>
+      <div class="hd-title" contenteditable="false">Aecooly · PR Dashboard 2026</div>
+      <div class="hd-sub" contenteditable="false">Public Relations · Weekly Report</div>
     </div>
   </div>
+  <div class="hd-mid">
+    <div class="mkt-switch">
+      <button class="mkt-btn active" onclick="switchMkt('global')">🌐 全球市场</button>
+      <button class="mkt-btn" onclick="switchMkt('jp')">🇯🇵 日本市场</button>
+    </div>
+  </div>
+  <div class="hd-right">
+    <div class="hd-week" contenteditable="false">W19 · 2026</div>
+    <div class="hd-tag" contenteditable="false">Internal Use Only</div>
+  </div>
+</div>
+
+<!-- TOOLBAR (edit mode only) -->
+<div id="toolbar">
   <div style="display:flex;align-items:center;gap:6px">
     <button class="tb-btn primary" onclick="manualSave()">
       <i data-lucide="save" style="width:13px;height:13px"></i> 保存
@@ -275,19 +302,19 @@ body:not(.readonly) .add-card-btn{display:block}
 <!-- EDIT TOOLBAR -->
 <div id="edit-toolbar">
   <div class="etb-group">
-    <button class="etb-btn" onclick="fmt(&#39;bold&#39;)" title="加粗"><b>B</b></button>
-    <button class="etb-btn" onclick="fmt(&#39;italic&#39;)" title="斜体"><i>I</i></button>
+    <button class="etb-btn" onclick="fmt('bold')" title="加粗"><b>B</b></button>
+    <button class="etb-btn" onclick="fmt('italic')" title="斜体"><i>I</i></button>
   </div>
   <div class="etb-sep"></div>
   <div class="etb-group">
-    <button class="etb-btn" onclick="setSize(&#39;12px&#39;)" title="小字">小</button>
-    <button class="etb-btn" onclick="setSize(&#39;14px&#39;)" title="中字">中</button>
-    <button class="etb-btn" onclick="setSize(&#39;17px&#39;)" title="大字">大</button>
+    <button class="etb-btn" onclick="setSize('12px')" title="小字">小</button>
+    <button class="etb-btn" onclick="setSize('14px')" title="中字">中</button>
+    <button class="etb-btn" onclick="setSize('17px')" title="大字">大</button>
   </div>
   <div class="etb-sep"></div>
   <div class="etb-group">
     <button class="etb-btn" onclick="insertLink()" title="插入链接">🔗 链接</button>
-    <button class="etb-btn" onclick="fmt(&#39;removeFormat&#39;)" title="清除格式">✕ 清除</button>
+    <button class="etb-btn" onclick="fmt('removeFormat')" title="清除格式">✕ 清除</button>
   </div>
 </div>
 
@@ -348,7 +375,7 @@ body:not(.readonly) .add-card-btn{display:block}
   </div>
   <div class="stat">
     <div class="stat-val" contenteditable="false">1</div>
-    <div class="stat-lbl" contenteditable="false">重点合作项目</div>
+    <div class="stat-lbl" contenteditable="false">重要资源合作</div>
   </div>
 </div>
 
@@ -374,24 +401,24 @@ body:not(.readonly) .add-card-btn{display:block}
       <div class="mlist">
         <div class="mlist-lbl">千万媒体</div>
         <div class="media-2col">
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.wirecutter.com/" target="_blank">Wirecutter</a></span><span class="mc-exp" contenteditable="false">1,000万+ UV</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.wired.com/" target="_blank">WIRED</a></span><span class="mc-exp" contenteditable="false">1,500万+ UV</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.wirecutter.com" target="_blank">Wirecutter</a></span><span class="mc-exp" contenteditable="false">1,000万+ UV</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.wired.com" target="_blank">WIRED</a></span><span class="mc-exp" contenteditable="false">1,500万+ UV</span></div>
         </div>
         <div class="mlist-lbl">百万媒体</div>
         <div class="media-2col">
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://time.com/" target="_blank">TIME Magazine</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.prevention.com/" target="_blank">Prevention</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.slashgear.com/" target="_blank">SlashGear</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.numerama.com/" target="_blank">Numerama</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.journaldugeek.com/" target="_blank">Journal du Geek</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.everydayhealth.com/" target="_blank">Everyday Health</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.hardwarezone.com.sg/" target="_blank">HardwareZone</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.yankodesign.com/" target="_blank" style="color: rgb(31, 92, 56);">Yanko Design</a></span><span class="mc-exp" contenteditable="false">已约稿</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://time.com" target="_blank">TIME Magazine</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.prevention.com" target="_blank">Prevention</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.slashgear.com" target="_blank">SlashGear</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.numerama.com" target="_blank">Numerama</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.journaldugeek.com" target="_blank">Journal du Geek</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.everydayhealth.com" target="_blank">Everyday Health</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.hardwarezone.com.sg" target="_blank">HardwareZone</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.yankodesign.com" target="_blank" style="color: rgb(31, 92, 56);">Yanko Design</a></span><span class="mc-exp" contenteditable="false">已约稿</span></div>
         </div>
         <div class="mlist-lbl">垂类媒体</div>
         <div class="media-2col">
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.techlicious.com/" target="_blank" style="color: rgb(31, 92, 56);">Techlicious</a></span><span class="mc-exp" contenteditable="false">—</span></div>
-          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.gadgetmatch.com/" target="_blank">GadgetMatch</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.techlicious.com" target="_blank" style="color: rgb(31, 92, 56);">Techlicious</a></span><span class="mc-exp" contenteditable="false">—</span></div>
+          <div class="mc"><span class="mc-name" contenteditable="false"><a href="https://www.gadgetmatch.com" target="_blank">GadgetMatch</a></span><span class="mc-exp" contenteditable="false">—</span></div>
         </div>
       </div>
     </div>
@@ -413,7 +440,7 @@ body:not(.readonly) .add-card-btn{display:block}
           <div class="wc-step"><div class="step-dot dot-wip"></div><span contenteditable="false">配图制作中（设计部）</span></div>
           <div class="wc-step"><div class="step-dot dot-wip"></div><span contenteditable="false">体育媒体资源 Pitching 中</span></div>
           <div class="wc-step"><div class="step-dot dot-todo"></div><span style="color:var(--text3)" contenteditable="false">图片交付（产品上架前）</span></div>
-          <div class="wc-step"><div class="step-dot dot-todo"></div><span style="color:var(--text3)" contenteditable="false">全网首发新闻稿（美通社）· 预计 5 月中旬</span></div>
+          <div class="wc-step"><div class="step-dot dot-todo"></div><span style="color:var(--text3)" contenteditable="false">全网首发新闻稿（美通社/EIN）· 预计 5 月中旬</span></div>
         </div>
       </div>
       <!-- HS -->
@@ -423,7 +450,7 @@ body:not(.readonly) .add-card-btn{display:block}
             <div class="pcard-title" contenteditable="false">Headspace × Aecooly</div>
             <div class="pcard-sub" contenteditable="false">上周更新 · 完整提案已发，等待反馈</div>
           </div>
-          <span class="badge bo" contenteditable="false">跟进中</span>
+          <span class="badge bo" contenteditable="false">婉仪跟进</span>
         </div>
         <div class="hs-row">
           <div class="hs-dir">
@@ -454,7 +481,7 @@ body:not(.readonly) .add-card-btn{display:block}
         <div style="width:110px;padding-left:12px" contenteditable="false">预计曝光</div>
         <div style="flex:1;padding-left:20px" contenteditable="false">发布进度</div>
       </div>
-      <div class="prod-row" onclick="toggleProd(&#39;pm01s&#39;)">
+      <div class="prod-row" onclick="toggleProd('pm01s')">
         <div class="prod-cells">
           <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pm01s" style="width: 14px; height: 14px;"></i><span contenteditable="false" onclick="event.stopPropagation()">PM01S</span></div>
           <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">12</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
@@ -480,12 +507,12 @@ body:not(.readonly) .add-card-btn{display:block}
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://www.gadgetmatch.com" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">GadgetMatch</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">科技评测</div><div class="pr-status"><span class="badge bgr" contenteditable="false">已寄样</span></div></div>
         </div>
       </div>
-      <div class="prod-row" onclick="toggleProd(&#39;pm02&#39;)">
+      <div class="prod-row" onclick="toggleProd('pm02')">
         <div class="prod-cells">
-          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pm02" style="width:14px;height:14px"></i><span contenteditable="false" onclick="event.stopPropagation()">PM02</span></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">8</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
+          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pm02" style="width: 14px; height: 14px;"></i><span contenteditable="false" onclick="event.stopPropagation()">PM02</span></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">19</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
           <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">4</div><div class="col-num-lbl" contenteditable="false">已发布</div></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">4</div><div class="col-num-lbl" contenteditable="false">待发布</div></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()"><br></div><div class="col-num-lbl" contenteditable="false">未发布</div></div>
           <div><div class="col-exp-val" contenteditable="false" onclick="event.stopPropagation()">待统计</div><div class="col-exp-lbl" contenteditable="false">预计曝光</div></div>
           <div class="col-bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div></div>
         </div>
@@ -494,15 +521,15 @@ body:not(.readonly) .add-card-btn{display:block}
         <div class="pr-table">
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">ChinaGadgetsReviews</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品评测</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">AbsoluteGeeks</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品评测</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
-        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">The-Gadgeteer · Reah B. Padla</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">综合评测</div><div class="pr-status"><span class="badge bo" contenteditable="false">待发布</span></div></div>
+        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/" ondblclick="editMediaCell(this)" contenteditable="false">stephscheersandjeers  ;   thebestofthesouthwest</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">综合评测</div><div class="pr-status"><span class="badge bo" contenteditable="false"><span style="color: rgb(31, 92, 56);">已发布</span></span></div></div>
         </div>
       </div>
-      <div class="prod-row" onclick="toggleProd(&#39;nk01&#39;)">
+      <div class="prod-row" onclick="toggleProd('nk01')">
         <div class="prod-cells">
-          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-nk01" style="width:14px;height:14px"></i><span contenteditable="false" onclick="event.stopPropagation()">NK01</span></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">7</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
+          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-nk01" style="width: 14px; height: 14px;"></i><span contenteditable="false" onclick="event.stopPropagation()">NK01</span></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">15</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
           <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">10</div><div class="col-num-lbl" contenteditable="false">已发布</div></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">2</div><div class="col-num-lbl" contenteditable="false">待发布</div></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()"><br></div><div class="col-num-lbl" contenteditable="false">未发布</div></div>
           <div><div class="col-exp-val" contenteditable="false" onclick="event.stopPropagation()">待统计</div><div class="col-exp-lbl" contenteditable="false">预计曝光</div></div>
           <div class="col-bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:71%"></div></div></div>
         </div>
@@ -514,12 +541,12 @@ body:not(.readonly) .add-card-btn{display:block}
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">The-Gadgeteer</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">综合评测</div><div class="pr-status"><span class="badge bo" contenteditable="false">待发布</span></div></div>
         </div>
       </div>
-      <div class="prod-row" onclick="toggleProd(&#39;pk01&#39;)">
+      <div class="prod-row" onclick="toggleProd('pk01')">
         <div class="prod-cells">
-          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pk01" style="width:14px;height:14px"></i><span contenteditable="false" onclick="event.stopPropagation()">PK01</span></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">5</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
+          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pk01" style="width: 14px; height: 14px;"></i><span contenteditable="false" onclick="event.stopPropagation()">PK01</span></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">12</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
           <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">2</div><div class="col-num-lbl" contenteditable="false">已发布</div></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">3</div><div class="col-num-lbl" contenteditable="false">待发布</div></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()"><br></div><div class="col-num-lbl" contenteditable="false">未发布</div></div>
           <div><div class="col-exp-val" contenteditable="false" onclick="event.stopPropagation()">待统计</div><div class="col-exp-lbl" contenteditable="false">预计曝光</div></div>
           <div class="col-bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div></div>
         </div>
@@ -533,23 +560,23 @@ body:not(.readonly) .add-card-btn{display:block}
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://techbuzzireland.com" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">TechBuzz Ireland</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">科技评测</div><div class="pr-status"><span class="badge bo" contenteditable="false">待发布</span></div></div>
         </div>
       </div>
-      <div class="prod-row" onclick="toggleProd(&#39;pf04&#39;)">
+      <div class="prod-row" onclick="toggleProd('pf04')">
         <div class="prod-cells">
-          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pf04" style="width:14px;height:14px"></i><span contenteditable="false" onclick="event.stopPropagation()">PF04</span></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">5</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
+          <div class="col-name"><i data-lucide="chevron-right" class="chevron" id="icon-pf04" style="width: 14px; height: 14px;"></i><span contenteditable="false" onclick="event.stopPropagation()">PF04</span></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">9</div><div class="col-num-lbl" contenteditable="false">媒体数</div></div>
           <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">6</div><div class="col-num-lbl" contenteditable="false">已发布</div></div>
-          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()">1</div><div class="col-num-lbl" contenteditable="false">待发布</div></div>
+          <div class="col-num"><div class="col-num-val" contenteditable="false" onclick="event.stopPropagation()"><br></div><div class="col-num-lbl" contenteditable="false">未发布</div></div>
           <div><div class="col-exp-val" contenteditable="false" onclick="event.stopPropagation()">待统计</div><div class="col-exp-lbl" contenteditable="false">预计曝光</div></div>
           <div class="col-bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div></div>
         </div>
       </div>
       <div class="prod-detail" id="detail-pf04">
         <div class="pr-table">
-        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">F.A.Z. · Kaufkompass</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">权威评测</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
+        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://www.polarotor.rs/edukacija/zastita/aecooly-ventilatori-moderne-lepeze-za-predstojece-vrele-dane/" ondblclick="editMediaCell(this)" contenteditable="false">polarotor.rs</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品评测</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://www.ictvesti.com/stizu-vreli-dani-pripremite-se-na-vreme-uz-moderne-aecooly-ventilatore/" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">ICTVesti</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品评测</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
-        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">Yahoo Creators · Alesandra Dubin</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品体验</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
+        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://digitalno.rs/recenzija-aecooly-ventilatori/" ondblclick="editMediaCell(this)" contenteditable="false">digitalno</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">产品体验</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
         <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://www.livegrowplayaustin.com/blog/2026-summer-essentials-gear-and-travel-guide--live-grow-play-austin" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">Live Grow Play Austin</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">夏季装备</div><div class="pr-status"><span class="badge bg" contenteditable="false">已发布</span></div></div>
-        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">The-Gadgeteer · Reah B. Padla</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">综合评测</div><div class="pr-status"><span class="badge bo" contenteditable="false">待发布</span></div></div>
+        <div class="pr-row"><div class="pr-media"><div class="media-cell"><span class="media-name linked" data-href="https://jeftino.rs/aecooly-ventilatori-moderne-lepeze-za-predstojece-vrele-dane/" ondblclick="editMediaCell(this)" contenteditable="false">jeftino.rs</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)" title="编辑名称/链接">🔗</button></div></div><div class="pr-type" contenteditable="false">综合评测</div><div class="pr-status"><span class="badge bo" contenteditable="false">待发布</span></div></div>
         </div>
       </div>
       <button class="add-card-btn" onclick="addMediaRow()" style="border-radius:0;margin:0;border-top:0.5px dashed var(--border2);border-left:none;border-right:none;border-bottom:none">+ 新增产品行</button>
@@ -567,12 +594,12 @@ body:not(.readonly) .add-card-btn{display:block}
     <div class="gs-divider"></div>
     <div class="gs-item"><div class="gs-val" id="gs-pending" contenteditable="false">9</div><div class="gs-lbl" contenteditable="false">待发布</div></div>
     <div class="gs-divider"></div>
-    <div class="gs-item"><div class="gs-val" contenteditable="false" id="gs-exposure">待补充</div><div class="gs-lbl" contenteditable="false">总曝光预估</div></div>
+    <div class="gs-item"><div class="gs-val" contenteditable="false" id="gs-exposure"><br></div><div class="gs-lbl" contenteditable="false">总曝光预估</div></div>
   </div>
   <div class="guide-grid">
 
     <!-- 礼物指南 -->
-    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest(&#39;.guide-col&#39;).remove();scheduleSave()" title="删除此列">✕</button>
+    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest('.guide-col').remove();scheduleSave()" title="删除此列">✕</button>
       <div class="guide-col-hd">
         <span class="guide-icon">🎁</span>
         <span class="guide-col-title" contenteditable="false">礼物指南</span>
@@ -590,7 +617,7 @@ body:not(.readonly) .add-card-btn{display:block}
     </div>
 
     <!-- 夏季装备 -->
-    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest(&#39;.guide-col&#39;).remove();scheduleSave()" title="删除此列">✕</button>
+    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest('.guide-col').remove();scheduleSave()" title="删除此列">✕</button>
       <div class="guide-col-hd">
         <span class="guide-icon">☀️</span>
         <span class="guide-col-title" contenteditable="false">夏季装备专题</span>
@@ -598,12 +625,12 @@ body:not(.readonly) .add-card-btn{display:block}
       </div>
       <div class="guide-item"><div class="media-cell"><span class="media-name linked" data-href="https://www.livegrowplayaustin.com/blog/2026-summer-essentials-gear-and-travel-guide--live-grow-play-austin" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">Live Grow Play Austin</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)">🔗</button></div><span class="badge bg" contenteditable="false">已发布</span></div>
       <div class="guide-item"><div class="media-cell"><span class="media-name" data-href="" ondblclick="editMediaCell(this)" contenteditable="false">Wanderous Affair</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)">🔗</button></div><span class="badge bo" contenteditable="false">待发布</span></div>
-      <div class="guide-item"><div class="media-cell"><span class="media-name linked" data-href="https://www.dnamagazine.com.au" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">DNA Magazine AU</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)">🔗</button></div><span class="badge bg" contenteditable="false">已发布</span></div>
+      <div class="guide-item"><div class="media-cell"><span class="media-name" data-href="" onclick="openLink(this)" ondblclick="editMediaCell(this)" contenteditable="false">DNA Magazine AU</span><button class="link-btn" onclick="editMediaCell(this.previousElementSibling)">🔗</button></div><span class="badge bg" contenteditable="false"><span style="color: rgb(146, 96, 14);">待发布</span></span></div>
       <button class="guide-add-btn" onclick="addGuideItem(this)">+ 添加</button>
     </div>
 
     <!-- 常态化指南 -->
-    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest(&#39;.guide-col&#39;).remove();scheduleSave()" title="删除此列">✕</button>
+    <div class="guide-col card"><button class="del-col-btn" onclick="this.closest('.guide-col').remove();scheduleSave()" title="删除此列">✕</button>
       <div class="guide-col-hd">
         <span class="guide-icon">📖</span>
         <span class="guide-col-title" contenteditable="false">常态化指南</span>
@@ -624,22 +651,22 @@ body:not(.readonly) .add-card-btn{display:block}
   <div class="card" id="roadmap-card">
     <div class="road-item">
       <div class="road-when" contenteditable="false">5月中</div>
-      <div><div class="road-title" contenteditable="false">世界杯全网首发新闻稿（美通社）</div><div class="road-detail" contenteditable="false">配合夏季营销节点，体育媒体 Pitching 同步推进</div></div>
+      <div><div class="road-title" contenteditable="false">世界杯全网首发新闻稿（美通社/EIN）</div><div class="road-detail" contenteditable="false">配合夏季营销节点，体育媒体 Pitching 同步推进</div></div>
       <div class="road-badge"><span class="badge bb" contenteditable="false">规划中</span></div>
     </div>
     <div class="road-item">
       <div class="road-when" contenteditable="false"><br></div>
-      <div><div class="road-title" contenteditable="false">PM01S 媒体跟进</div><div class="road-detail" contenteditable="false">配合亚马逊上架节奏，推动 Wirecutter / WIRED 等千万媒体内容发布</div></div>
+      <div><div class="road-title" contenteditable="false">PM01S 媒体维护</div><div class="road-detail" contenteditable="false">配合亚马逊上架节奏，推动媒体内容发布</div></div>
       <div class="road-badge"><span class="badge bo" contenteditable="false">跟进中</span></div>
     </div>
     <div class="road-item">
       <div class="road-when" contenteditable="false"><br></div>
-      <div><div class="road-title" contenteditable="false">体育资源pitch 中</div><div class="road-detail" contenteditable="false">配合世界杯节点营销</div></div>
+      <div><div class="road-title" contenteditable="false">体育媒体Pitch 中</div><div class="road-detail" contenteditable="false">配合世界杯节点营销</div></div>
       <div class="road-badge"><span class="badge bo" contenteditable="false">跟进中</span></div>
     </div>
     <div class="road-item">
       <div class="road-when" contenteditable="false"><br></div>
-      <div><div class="road-title" contenteditable="false">媒体资源持续扩充</div><div class="road-detail" contenteditable="false">以 PM01S 解禁为契机，加速建联更多头部媒体，夏季内容持续释出</div></div>
+      <div><div class="road-title" contenteditable="false">科技、指南媒体资源持续扩充</div><div class="road-detail" contenteditable="false">以 PM01S 解禁为契机，加速建联更多头部媒体，夏季内容持续释出</div></div>
       <div class="road-badge"><span class="badge bgr" contenteditable="false">持续</span></div>
     </div>
     <button class="add-card-btn" onclick="addRoadItem()" style="border-radius:0;margin:0;border-top:0.5px dashed var(--border2);border-left:none;border-right:none;border-bottom:none">+ 新增规划条目</button>
@@ -654,7 +681,7 @@ body:not(.readonly) .add-card-btn{display:block}
 <div class="jp-statbar">
   <div class="stat"><div class="stat-val" contenteditable="false">10</div><div class="stat-lbl" contenteditable="false">新闻稿规划（4-5月）</div></div>
   <div class="stat"><div class="stat-val" contenteditable="false">5</div><div class="stat-lbl" contenteditable="false">已发布</div></div>
-  <div class="stat"><div class="stat-val" contenteditable="false">3</div><div class="stat-lbl" contenteditable="false">主动合作媒体</div></div>
+  <div class="stat"><div class="stat-val" contenteditable="false">3</div><div class="stat-lbl" contenteditable="false">合作媒体</div></div>
 </div>
 
 <div class="sec">
@@ -667,8 +694,8 @@ body:not(.readonly) .add-card-btn{display:block}
         <tr><td class="pt-week" contenteditable="false">4月 W2</td><td contenteditable="false">「iF・Red Dot・TIME選出」Aecooly Aero ハイパフォーマンスハンディファン</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PH系列</td><td><span class="badge bg" contenteditable="false">已发布</span></td></tr>
         <tr><td class="pt-week" contenteditable="false">4月 W3</td><td contenteditable="false">GW前に準備したい風の形。Aecooly「Air Gimbal」ハンディターボファンを発売</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PF04</td><td><span class="badge bg" contenteditable="false">已发布</span></td></tr>
         <tr><td class="pt-week" contenteditable="false">4月 W4</td><td contenteditable="false">Aecooly、風とミストで織りなす新しい冷却のかたち。Cold Air ミストファンを発売</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PM02</td><td><span class="badge bg" contenteditable="false">已发布</span></td></tr>
-        <tr><td class="pt-week" contenteditable="false">5月 W1</td><td contenteditable="false">GWの移動を、もっと快適に。Aecooly、3つのパーソナル扇風機をラインナップ</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PM02 · PF04 · PF01</td><td><span class="badge bg" contenteditable="false">已发布</span></td></tr>
-        <tr><td class="pt-week" contenteditable="false">5月 W1</td><td contenteditable="false">【母の日ギフト】機能性とデザイン性を兼ね備えた、上質な「涼しさのプレゼント」</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PF04 · PM02</td><td><span class="badge bo" contenteditable="false">规划中</span></td></tr>
+        <tr><td class="pt-week" contenteditable="false">4月 W4</td><td contenteditable="false">GWの移動を、もっと快適に。Aecooly、3つのパーソナル扇風機をラインナップ</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">PM02 · PF04 · PF01</td><td><span class="badge bg" contenteditable="false">已发布</span></td></tr>
+        <tr><td class="pt-week" contenteditable="false"><b>5月 W1</b></td><td contenteditable="false"><b>【母の日ギフト】機能性とデザイン性を兼ね備えた、上質な「涼しさのプレゼント」</b></td><td style="font-size:11px;color:var(--text2)" contenteditable="false"><b>PF04 · PM02</b></td><td><span class="badge bo" contenteditable="false">规划中</span></td></tr>
         <tr><td class="pt-week" contenteditable="false">5月 W2</td><td contenteditable="false">【ヨドバシカメラ正式取扱い開始】Aecooly、国内最大級の家電量販店に登場</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">—</td><td><span class="badge bo" contenteditable="false">待发布</span></td></tr>
         <tr><td class="pt-week" contenteditable="false">5月 W3</td><td contenteditable="false">バーベキューで手がふさがっても大丈夫。両手が空く、涼しい新習慣</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">NK01 · PF04</td><td><span class="badge bo" contenteditable="false">待发布</span></td></tr>
         <tr><td class="pt-week" contenteditable="false">5月 W3</td><td contenteditable="false">【新登場】両手フリー＆ミニマル設計の「新感覚ネックファン」が遂に発売！</td><td style="font-size:11px;color:var(--text2)" contenteditable="false">NK01</td><td><span class="badge bo" contenteditable="false">待发布</span></td></tr>
@@ -691,7 +718,7 @@ body:not(.readonly) .add-card-btn{display:block}
         <div contenteditable="false">发行日期：<strong>2026.05.22</strong></div>
         <div contenteditable="false">日本唯一悬赏专门杂志</div>
       </div>
-      <div class="jm-footer"><span class="badge bo" contenteditable="false">制作中</span></div>
+      <div class="jm-footer"><span class="badge bo" contenteditable="false">已提供图片</span></div>
     </div>
     <div class="jm-card">
       <div class="jm-type" contenteditable="false">女性数字媒体</div>
@@ -700,7 +727,7 @@ body:not(.readonly) .add-card-btn{display:block}
         <div contenteditable="false">受众：<strong>20-30代女性</strong></div>
         <div contenteditable="false">寄样产品：<strong>PM02</strong></div>
         <div contenteditable="false">合作形式：<strong>图文评测</strong></div>
-        <div contenteditable="false">月访问量：<strong>待补充</strong></div>
+        <div contenteditable="false">月访问量：<font color="#1a1915">36K</font></div>
         <div contenteditable="false">预计上线：<strong>待确认</strong></div>
       </div>
       <div class="jm-footer"><span class="badge bb" contenteditable="false">评测进行中</span></div>
@@ -711,12 +738,12 @@ body:not(.readonly) .add-card-btn{display:block}
       <div class="jm-field">
         <div contenteditable="false">形式：<strong>线下录制访谈</strong></div>
         <div contenteditable="false">发布平台：<strong>Spotify</strong></div>
-        <div contenteditable="false">受众：<strong>商业 / 创业群体</strong></div>
-        <div contenteditable="false">录制时间：<strong>待确认</strong></div>
+        <div contenteditable="false">受众：主妇</div>
+        <div contenteditable="false">录制时间：待定</div>
       </div>
       <div class="jm-footer">
-        <span class="badge bo" contenteditable="false">洽谈中</span>
-        <div class="note-warn" contenteditable="false">⚠ 需提前 1 个月预约 · 嘉宾待定</div>
+        <span class="badge bo" contenteditable="false">待确认</span>
+        <div class="note-warn" contenteditable="false">⚠ 需提前 1 个月预约</div>
       </div>
     </div>
   </div>
@@ -903,18 +930,16 @@ function manualSave(){
 function shareReadonly(){
   try{
     var fullHTML=document.documentElement.outerHTML;
-    // 1. Strip all contenteditable so exported file is non-editable
     fullHTML=fullHTML.replace(/contenteditable="false"/g,'contenteditable="false"');
-    // 2. Inject readonly style
     var roStyle='<style>'+
       '#toolbar,#edit-toolbar{display:none!important}'+
-      'body{padding-top:0!important}'+
+      'body{padding-top:56px!important}'+
       '.add-card-btn,.guide-add-btn,.link-btn,.del-col-btn{display:none!important}'+
       '[contenteditable]{pointer-events:none!important;cursor:default!important}'+
       '.media-name[data-href]{pointer-events:auto!important;cursor:pointer!important;color:#1f5c38}'+
+      '.mkt-btn{pointer-events:auto!important;cursor:pointer!important}'+
       '</style>';
     fullHTML=fullHTML.replace('</head>',roStyle+'</head>');
-    // 3. Remove restore-from-localStorage logic so exported file shows current content
     fullHTML=fullHTML.replace(/\/\/ ── RESTORE SAVED CONTENT[\s\S]*?\}\)\(\);/,'');
     var blob=new Blob([fullHTML],{type:'text/html;charset=utf-8'});
     var a=document.createElement('a');
