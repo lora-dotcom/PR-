@@ -1,687 +1,239 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/deone/Desktop/5.22/index.html -->
-<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aecooly · PR Dashboard 2026</title>
-<link href="file:///C:/Users/deone/Desktop/5.22/Aecooly%20%C2%B7%20PR%20Dashboard%202026_files/css2" rel="stylesheet">
-<style>
-  :root {
-    --bg:#f5f3ee; --surface:#ffffff; --surface2:#faf9f6;
-    --border:#e8e4dc; --border2:#d4cfc4;
-    --text-primary:#1a1916; --text-secondary:#6b6760; --text-tertiary:#9e9b95;
-    --accent:#2d5a3d; --amber:#c4760a; --amber-light:#fdf3e0;
-    --tag-green-bg:#e8f0eb; --tag-green-text:#2d5a3d;
-    --tag-amber-bg:#fdf3e0; --tag-amber-text:#c4760a;
-    --tag-blue-bg:#e8f0fa;  --tag-blue-text:#1a4a7a;
-    --tag-gray-bg:#f0ede8;  --tag-gray-text:#6b6760;
-    --radius:10px; --radius-sm:6px;
-    --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-primary);font-size:14px;line-height:1.5;min-height:100vh;}
-  .topbar{position:sticky;top:0;z-index:100;background:rgba(245,243,238,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;height:52px;gap:16px;}
-  .topbar-brand{font-size:13px;font-weight:500;color:var(--text-secondary);white-space:nowrap;}
-  .topbar-brand strong{color:var(--text-primary);font-weight:600;}
-  .topbar-tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:3px;margin:0 auto;}
-  .tab-btn{padding:5px 16px;border-radius:6px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all .15s;white-space:nowrap;}
-  .tab-btn.active{background:var(--accent);color:#fff;}
-  .tab-btn:not(.active):hover{background:var(--bg);color:var(--text-primary);}
-  .readonly-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--amber-light);border:1px solid #e8c875;border-radius:6px;font-size:12px;font-weight:500;color:var(--amber);}
-  .main{max-width:1160px;margin:0 auto;padding:32px 28px 64px;}
-  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
-  .stats-grid.three{grid-template-columns:repeat(3,1fr);}
-  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
-  .stat-card:nth-child(1){border-top:3px solid #4caf81;}
-  .stat-card:nth-child(2){border-top:3px solid #6aabdb;}
-  .stat-card:nth-child(3){border-top:3px solid #f0a830;}
-  .stat-card:nth-child(4){border-top:3px solid #2d5a3d;}
-  .stat-number{font-size:36px;font-weight:300;line-height:1;margin-bottom:8px;font-family:'DM Mono',monospace;letter-spacing:-0.02em;}
-  .stat-label{font-size:13px;color:var(--text-secondary);}
-  .guide-summary-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow);}
-  .gsb-cell{padding:18px 22px;border-right:1px solid var(--border);text-align:center;}
-  .gsb-cell:last-child{border-right:none;}
-  .gsb-num{font-size:28px;font-weight:300;font-family:'DM Mono',monospace;line-height:1;margin-bottom:4px;}
-  .gsb-label{font-size:12px;color:var(--text-secondary);}
-  .section-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
-  .project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
-  .projects-grid .project-card:nth-child(1){border-top:3px solid #2d5a3d;}
-  .projects-grid > div:nth-child(2) .project-card:nth-child(1){border-top:3px solid #f0a830;}
-  .projects-grid > div:nth-child(2) .project-card:nth-child(2){border-top:3px solid #e07b39;}
-  .projects-grid > div:nth-child(2) .project-card:nth-child(3){border-top:3px solid #7b68c8;}
-  .project-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;gap:12px;}
-  .project-title{font-size:15px;font-weight:600;}
-  .project-subtitle{font-size:12px;color:var(--text-tertiary);margin-bottom:16px;}
-  .tag-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
-  .tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:500;white-space:nowrap;cursor:default;user-select:none;}
-  .tag-green{background:var(--tag-green-bg);color:var(--tag-green-text);}
-  .tag-amber{background:var(--tag-amber-bg);color:var(--tag-amber-text);}
-  .tag-blue{background:var(--tag-blue-bg);color:var(--tag-blue-text);}
-  .tag-gray{background:var(--tag-gray-bg);color:var(--tag-gray-text);}
-  .media-tier-label{font-size:11px;color:var(--text-tertiary);margin:14px 0 8px;font-weight:500;}
-  .media-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-  .media-row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;gap:6px;}
-  .media-name{font-weight:500;flex:1;}
-  .media-uv{font-size:11px;color:var(--text-tertiary);font-family:'DM Mono',monospace;}
-  .media-link-chip{display:inline-flex;align-items:center;font-size:11px;color:var(--accent);text-decoration:none;padding:1px 6px;border-radius:4px;background:#edf4f0;}
-  .media-link-chip:hover{background:#daeae1;}
-  .checklist{list-style:none;display:flex;flex-direction:column;gap:8px;}
-  .checklist li{display:flex;align-items:center;gap:8px;font-size:13px;}
-  .check-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-  .dot-green{background:#4caf81;}.dot-amber{background:#f0a830;}.dot-gray{background:#c5c1ba;}
-  .hs-directions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
-  .hs-dir{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;}
-  .hs-dir-label{font-size:11px;font-weight:600;color:var(--text-tertiary);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-  .dir-tag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;background:var(--accent);color:#fff;}
-  .hs-dir p{font-size:12px;color:var(--text-secondary);line-height:1.5;}
-  .hs-next{margin-top:14px;font-size:12px;color:var(--text-tertiary);font-style:italic;border-top:1px solid var(--border);padding-top:10px;}
-  .product-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;box-shadow:var(--shadow);}
-  .product-table{width:100%;border-collapse:collapse;}
-  .product-table th{padding:10px 20px;text-align:left;font-size:11px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface2);}
-  .product-table td{padding:14px 20px;border-bottom:1px solid var(--border);vertical-align:middle;}
-  .product-table tr:last-child td{border-bottom:none;}
-  .product-table tr:hover td{background:var(--surface2);}
-  .product-name{font-weight:600;font-size:14px;}
-  .num-big{font-family:'DM Mono',monospace;font-size:18px;font-weight:400;}
-  .num-label{font-size:11px;color:var(--text-tertiary);display:block;margin-top:1px;}
-  .exposure-text{font-family:'DM Mono',monospace;font-size:13px;color:var(--text-secondary);}
-  .guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
-  .guide-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
-  .guide-card:nth-child(1){border-top:3px solid #4caf81;}
-  .guide-card:nth-child(2){border-top:3px solid #f0a830;}
-  .guide-card:nth-child(3){border-top:3px solid #6aabdb;}
-  .guide-title{font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;margin-bottom:14px;}
-  .guide-stats{display:flex;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-  .guide-stat{font-size:11px;color:var(--text-tertiary);}
-  .guide-stat strong{font-size:16px;color:var(--text-primary);display:block;font-family:'DM Mono',monospace;font-weight:400;}
-  .guide-item{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);gap:8px;}
-  .guide-item:last-of-type{border-bottom:none;}
-  .guide-item-left{display:flex;align-items:center;gap:6px;flex:1;}
-  .guide-item-name{font-size:13px;color:var(--text-primary);}
-  .roadmap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;box-shadow:var(--shadow);}
-  .roadmap-item{display:flex;align-items:flex-start;gap:16px;padding:16px 22px;border-bottom:1px solid var(--border);}
-  .roadmap-item:last-child{border-bottom:none;}
-  .roadmap-item:hover{background:var(--surface2);}
-  .roadmap-time{font-size:12px;color:var(--text-tertiary);white-space:nowrap;min-width:48px;padding-top:2px;font-family:'DM Mono',monospace;}
-  .roadmap-content{flex:1;}
-  .roadmap-title{font-size:14px;font-weight:600;margin-bottom:3px;}
-  .roadmap-desc{font-size:12px;color:var(--text-secondary);}
-  .prtimes-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;box-shadow:var(--shadow);}
-  .prtimes-table{width:100%;border-collapse:collapse;}
-  .prtimes-table th{padding:10px 16px;text-align:left;font-size:11px;font-weight:600;color:var(--text-tertiary);letter-spacing:0.04em;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface2);}
-  .prtimes-table td{padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:middle;}
-  .prtimes-table tr:last-child td{border-bottom:none;}
-  .prtimes-table tr:hover td{background:var(--surface2);}
-  .pr-time{font-size:12px;color:var(--text-tertiary);font-family:'DM Mono',monospace;white-space:nowrap;}
-  .prtimes-table tbody tr td:first-child{border-left:3px solid transparent;}
-  .prtimes-table tbody tr.row-published td:first-child{border-left-color:#4caf81;}
-  .prtimes-table tbody tr.row-pending td:first-child{border-left-color:#d0ccc4;}
-  .pr-title{font-size:13px;font-weight:500;}
-  .pr-product{font-size:11px;color:var(--text-tertiary);font-family:'DM Mono',monospace;}
-  .jp-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
-  .jp-media-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
-  .jp-media-type{font-size:11px;color:var(--text-tertiary);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
-  .jp-media-name{font-size:16px;font-weight:600;margin-bottom:14px;line-height:1.3;}
-  .jp-meta-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);color:var(--text-secondary);gap:8px;}
-  .jp-meta-row:last-of-type{border-bottom:none;}
-  .jp-meta-key{color:var(--text-tertiary);white-space:nowrap;}
-  .jp-card-footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
-  .jp-skipped-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:32px;box-shadow:var(--shadow);}
-  .skipped-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
-  .skipped-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
-  .skipped-title{font-size:15px;font-weight:600;margin-bottom:3px;}
-  .skipped-url{font-size:12px;color:var(--text-tertiary);font-family:'DM Mono',monospace;}
-  .skipped-reason{font-size:13px;color:var(--text-secondary);line-height:1.65;padding:10px 14px;background:#fdf8f0;border-left:3px solid #e8c875;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:14px;}
-  .skipped-pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-  .price-cell{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;}
-  .price-cell.total{background:#fdf3e0;border-color:#e8c875;}
-  .price-cell-label{font-size:11px;color:var(--text-tertiary);margin-bottom:4px;}
-  .price-cell-val{font-size:15px;font-weight:600;font-family:'DM Mono',monospace;}
-  .price-cell.total .price-cell-val{color:var(--amber);}
-  .price-cell-sub{font-size:11px;color:var(--text-tertiary);margin-top:2px;}
-  .skipped-reach{font-size:13px;color:var(--text-secondary);padding-top:12px;border-top:1px solid var(--border);display:flex;gap:20px;flex-wrap:wrap;}
-  .skipped-reach span{display:flex;align-items:center;gap:6px;}
-  .view-hidden{display:none!important;}
-  details.project-card{display:block;align-self:start;}
-  details.project-card summary{display:flex;align-items:center;}
-  details.project-card summary .project-card-header{flex:1;}
-  .weekly-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
-  .weekly-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:14px;}
-  .weekly-item.published{border-left:4px solid #4caf81;}
-  .weekly-item.added{border-left:4px solid #6aabdb;}
-  .weekly-item.progress{border-left:4px solid #f0a830;}
-  .weekly-item.blocked{border-left:4px solid #c5c1ba;}
-  .weekly-badge{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-  .badge-published{background:#e8f0eb;color:#2d5a3d;}
-  .badge-added{background:#e8f0fa;color:#1a4a7a;}
-  .badge-progress{background:#fdf3e0;color:#c4760a;}
-  .badge-blocked{background:#f0ede8;color:#6b6760;}
-  .weekly-content{flex:1;}
-  .weekly-title{font-size:14px;font-weight:600;margin-bottom:4px;line-height:1.4;}
-  .weekly-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;}
-  .weekly-meta{font-size:11px;color:var(--text-tertiary);margin-top:6px;font-family:'DM Mono',monospace;}
-  .pm-published-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;}
-  .pm-release-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);border-left:4px solid #4caf81;min-height:150px;display:flex;flex-direction:column;}
-  .pm-release-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-  .pm-release-name{font-size:14px;font-weight:600;line-height:1.35;}
-  .pm-release-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;flex:1;}
-  .pm-release-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
-  .pm-product-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;margin-bottom:32px;}
-  .pm-product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
-  .pm-product-card.pm-main{border-top:4px solid #2d5a3d;}
-  .pm-product-card.pm-secondary{border-top:4px solid #c4760a;}
-  .pm-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px;}
-  .pm-card-title{font-size:17px;font-weight:700;line-height:1.25;}
-  .pm-card-subtitle{font-size:12px;color:var(--text-secondary);line-height:1.5;margin-bottom:14px;}
-  .pm-card-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
-  .pm-card-stat{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;}
-  .pm-card-stat strong{display:block;font-family:'DM Mono',monospace;font-size:18px;font-weight:400;line-height:1.1;margin-bottom:3px;}
-  .pm-card-stat span{font-size:11px;color:var(--text-tertiary);}
-  .pm-media-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-  .pm-media-row{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 9px;font-size:12px;}
-  .pm-media-left{display:flex;align-items:center;gap:6px;min-width:0;}
-  .pm-media-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .pm-product-chip{font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;white-space:nowrap;}
-  .pm-chip-s{background:#e8f0eb;color:#2d5a3d;}
-  .pm-chip-1{background:#e8f0fa;color:#1a4a7a;}
-  .pm-chip-2{background:#fdf3e0;color:#c4760a;}
-  .pm-uv{font-size:11px;color:var(--text-tertiary);font-family:'DM Mono',monospace;white-space:nowrap;}
-  .pm-uv.hot{color:#c0392b;font-weight:600;}
-  .pm-link{font-size:11px;color:var(--accent);text-decoration:none;padding:2px 7px;border-radius:4px;background:#edf4f0;white-space:nowrap;}
-  .pm-link:hover{background:#daeae1;}
-
-  @media(max-width:900px){
-    .stats-grid{grid-template-columns:repeat(2,1fr);}
-    .projects-grid{grid-template-columns:1fr;}
-    .guides-grid{grid-template-columns:1fr;}
-    .jp-media-grid{grid-template-columns:1fr;}
-    .pm-published-grid{grid-template-columns:1fr 1fr;}
-    .pm-product-grid{grid-template-columns:1fr;}
-    .pm-media-list{grid-template-columns:1fr;}
-    .guide-summary-bar{grid-template-columns:repeat(2,1fr);}
-    .skipped-pricing{grid-template-columns:1fr 1fr;}
-  }
-</style>
+<!-- saved from url=(0087)file:///C:/Users/deone/Documents/Codex/2026-05-29/1/Aecooly_PR_New_Dashboard/index.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aecooly PR Dashboard</title>
+  <style>
+    :root{
+      --bg:#f6f4ef;--panel:#fff;--soft:#faf9f6;--line:#e7e1d8;--line2:#d8d0c4;
+      --text:#191814;--muted:#6e675f;--sub:#9a938a;--green:#2d5a3d;--blue:#1f5f91;
+      --amber:#b86e08;--red:#c0392b;--shadow:0 1px 2px rgba(0,0,0,.05);
+      --r:10px;--rs:6px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.52 "Inter","Segoe UI",Arial,sans-serif}
+    a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+    .top{position:sticky;top:0;z-index:20;background:rgba(246,244,239,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);height:56px;display:flex;align-items:center;padding:0 28px;gap:20px}
+    .brand{font-size:14px;color:var(--muted);white-space:nowrap}.brand strong{color:var(--text)}
+    .tabs{display:flex;gap:4px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px}
+    .tab{border:0;background:transparent;border-radius:6px;padding:8px 20px;font:700 14px/1 "Inter","Segoe UI",Arial,sans-serif;color:var(--muted);cursor:pointer}
+    .tab.active{background:var(--green);color:#fff}
+    .status{font-size:13px;color:var(--amber);background:#fdf3e0;border:1px solid #ead09b;border-radius:6px;padding:4px 9px}
+    main{max-width:1180px;margin:0 auto;padding:30px 28px 70px}
+    .view{display:block}.hidden{display:none!important}
+    .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}
+    .page-title{font-size:28px;font-weight:780;letter-spacing:0;margin:0 0 5px}.page-sub{font-size:15px;color:var(--muted)}
+    .section{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#82786d;padding-bottom:10px;border-bottom:1px solid var(--line);margin:32px 0 15px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+    .stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);border-top:3px solid var(--green)}
+    .stat:nth-child(2){border-top-color:#6aabdb}.stat:nth-child(3){border-top-color:#f0a830}.stat:nth-child(4){border-top-color:#7c8f7c}
+    .num{font-family:"Consolas","DM Mono",monospace;font-size:35px;font-weight:400;line-height:1;margin-bottom:8px}.label{font-size:14px;color:var(--muted)}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px}
+    table{width:100%;border-collapse:collapse}th{background:var(--soft);color:#7e766d;font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:800;text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+    td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:15px}tr:last-child td{border-bottom:0}tr:hover td{background:var(--soft)}
+    .media{font-weight:760}.desc{font-size:14px;color:#5f5850;line-height:1.5}.uv{font-family:"Consolas","DM Mono",monospace;font-size:14px;color:#5f5850;font-weight:700;white-space:nowrap}.uv.hot{color:var(--red);font-weight:850}
+    .chip{display:inline-flex;align-items:center;justify-content:center;min-width:54px;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:850;white-space:nowrap}
+    .pm01s{background:#e7f1eb;color:var(--green)}.pm01{background:#e8f0fa;color:var(--blue)}.pm02{background:#fdf3e0;color:var(--amber)}
+    .other{background:#f0ede8;color:var(--muted)}.published{background:#e7f1eb;color:var(--green)}.resource{background:#f0ede8;color:var(--muted)}
+    .link{display:inline-flex;text-decoration:none;color:var(--green);background:#edf4f0;border-radius:4px;padding:4px 9px;font-size:12px;font-weight:760;white-space:nowrap}.link:hover{background:#dbece2}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.progress{padding:18px 20px;border-left:4px solid var(--green)}.progress.amber{border-left-color:var(--amber)}
+    .progress-title{font-weight:800;margin-bottom:7px;font-size:16px}.progress p{margin:0;color:#5f5850;font-size:15px;line-height:1.6}
+    .thread-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.thread{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;border-left:4px solid var(--green)}
+    .thread.pm02-line{border-left-color:var(--amber)}.thread-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.thread-name{font-size:19px;font-weight:800}.thread-sub{font-size:14px;color:var(--muted);margin-top:4px}
+    .mini-stats{display:flex;gap:8px;flex-wrap:wrap}.mini{background:var(--soft);border:1px solid var(--line);border-radius:var(--rs);padding:10px 13px;min-width:120px}.mini strong{display:block;font-family:Consolas,monospace;font-size:20px;font-weight:400}.mini span{font-size:12px;color:#7e766d}
+    .conversion{display:grid;grid-template-columns:1fr 1fr;gap:14px}.conversion .panel{padding:19px 21px}.source{display:flex;justify-content:space-between;align-items:center;gap:12px}.source strong{font-size:16px}.source span{font-size:14px;color:var(--muted)}
+    @media(max-width:900px){.stats,.split,.thread-grid,.conversion{grid-template-columns:1fr 1fr}.panel{overflow-x:auto}table{min-width:760px}.page-head{display:block}.top{padding:0 14px}.status{display:none}}
+    @media(max-width:640px){.stats,.split,.thread-grid,.conversion{grid-template-columns:1fr}.tabs{margin-left:auto}.brand{display:none}}
+  </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="topbar-brand"><strong>Aecooly</strong> &nbsp;·&nbsp; PR Dashboard 2026</div>
-  <div class="topbar-tabs">
-    <button class="tab-btn active" onclick="switchRegion(&#39;weekly&#39;)">📋 Weekly</button>
-    <button class="tab-btn" onclick="switchRegion(&#39;pm&#39;)">🧊 PM 系列</button>
-    <button class="tab-btn" onclick="switchRegion(&#39;global&#39;)">🌍 全球市场</button>
-    <button class="tab-btn" onclick="switchRegion(&#39;japan&#39;)">🇯🇵 日本市场</button>
-  </div>
-  <span class="readonly-badge">👁 只读模式</span>
+<header class="top">
+  <div class="brand"><strong>Aecooly</strong> · PR Dashboard</div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="weekly">每周看板</button>
+    <button class="tab" data-tab="pm">PM 系列</button>
+  </nav>
+  <div class="status">只读看板</div>
 </header>
-<main class="main">
-  <div id="view-pm" class="view-hidden">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">41</div><div class="stat-label">PM 系列媒体资源</div></div>
-      <div class="stat-card"><div class="stat-number">8</div><div class="stat-label">已发布内容</div></div>
-      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">覆盖型号</div></div>
-      <div class="stat-card"><div class="stat-number" style="font-size:28px;">≈ 230K+</div><div class="stat-label">已发布预估媒体曝光</div></div>
-    </div>
-    <div class="section-label">已发布内容</div>
-    <div class="pm-published-grid">
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">GAMES.GG</div><span class="tag tag-green">PM01S</span></div>
-        <div class="pm-release-desc">游戏媒体深度评测，聚焦 Cold Air Ultra 的高温场景和便携冷却体验</div>
-        <div class="pm-release-footer"><span class="pm-uv hot">10.9M UV</span><a class="pm-link" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">The Inspiration Grid</div><span class="tag tag-blue">PM01</span></div>
-        <div class="pm-release-desc">设计媒体 editorial，围绕 Cold Air Ultra / pocket-sized cooling system 叙事展开</div>
-        <div class="pm-release-footer"><span class="pm-uv">110K UV</span><a class="pm-link" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">China Gadgets Reviews</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">开箱报道，展示 Cold Air Portable High-Speed Misting Fan 的产品体验</div>
-        <div class="pm-release-footer"><span class="pm-uv">124.6K UV</span><a class="pm-link" href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">Absolute Geeks</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">评测内容 + Instagram Reel，覆盖中东便携降温和移动使用场景</div>
-        <div class="pm-release-footer"><span class="pm-uv">24.2K UV</span><a class="pm-link" href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">Steph's Cheers & Jeers</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">母亲节礼物指南收录，作为季节性礼品场景推荐内容发布</div>
-        <div class="pm-release-footer"><span class="pm-uv">5.8K UV</span><a class="pm-link" href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">Straits Times</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">真实高温环境下手持风扇横评，覆盖旅行和生活方式场景</div>
-        <div class="pm-release-footer"><span class="pm-uv hot">15.1M UV</span><a class="pm-link" href="https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">Best of the Southwest</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">礼物指南内容收录，补充家庭和生活方式类用户触达</div>
-        <div class="pm-release-footer"><span class="pm-uv">6.1K UV</span><a class="pm-link" href="https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-" target="_blank">查看</a></div>
-      </div>
-      <div class="pm-release-card">
-        <div class="pm-release-head"><div class="pm-release-name">NightHelper</div><span class="tag tag-amber">PM02</span></div>
-        <div class="pm-release-desc">Blog + IG / FB / X 多渠道发布，覆盖夏季热门产品推荐场景</div>
-        <div class="pm-release-footer"><span class="pm-uv">1K UV</span><a class="pm-link" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year//" target="_blank">查看</a></div>
-      </div>
-    </div>
-    <div class="section-label">产品媒体概览</div>
-    <div class="pm-product-grid">
-      <div class="pm-product-card pm-main">
-        <div class="pm-card-header">
-          <div>
-            <div class="pm-card-title">PM01S / PM01</div>
-            <div class="pm-card-subtitle">Cold Air Ultra 主线 · PM01S 资源与 PM01 关联媒体合并展示，并用标签区分型号</div>
-          </div>
-          <span class="tag tag-green">首批内容已发布</span>
-        </div>
-        <div class="pm-card-stats">
-          <div class="pm-card-stat"><strong>20</strong><span>媒体资源</span></div>
-          <div class="pm-card-stat"><strong>2</strong><span>已发布内容</span></div>
-          <div class="pm-card-stat"><strong>≈ 110K+</strong><span>预估媒体曝光</span></div>
-        </div>
-        <div class="pm-media-list">
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Wirecutter</span></div><span class="pm-uv hot">636.3M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">TomsGuide</span></div><span class="pm-uv hot">23.8M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">WIRED</span></div><span class="pm-uv hot">17.3M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">TIME Magazine</span></div><span class="pm-uv hot">14.8M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">GAMES.GG</span></div><span class="pm-uv hot">10.9M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Prevention</span></div><span class="pm-uv hot">7.6M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">SlashGear</span></div><span class="pm-uv hot">6.5M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Numerama</span></div><span class="pm-uv hot">6.4M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Journal du Geek</span></div><span class="pm-uv hot">6.2M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Everyday Health</span></div><span class="pm-uv hot">5.2M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">HardwareZone</span></div><span class="pm-uv hot">2.2M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Scary Mommy</span></div><span class="pm-uv hot">1.7M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">GadgetMatch</span></div><span class="pm-uv">285.5K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">Techlicious</span></div><span class="pm-uv">284.8K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-s">PM01S</span><span class="pm-media-name">appgefahren</span></div><span class="pm-uv">192K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-1">PM01</span><span class="pm-media-name">Joy Filled Eats</span></div><span class="pm-uv">244K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-1">PM01</span><span class="pm-media-name">The Inspiration Grid</span></div><span class="pm-uv">110K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-1">PM01</span><span class="pm-media-name">Beauty News NYC</span></div><span class="pm-uv">10.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-1">PM01</span><span class="pm-media-name">Sonny Dickson</span></div><span class="pm-uv">8K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-1">PM01</span><span class="pm-media-name">Stephanie Sheaffer</span></div><span class="pm-uv">1K</span></div>
-        </div>
-      </div>
-      <div class="pm-product-card pm-secondary">
-        <div class="pm-card-header">
-          <div>
-            <div class="pm-card-title">PM02</div>
-            <div class="pm-card-subtitle">High-Speed Misting Fan 主线 · 发布内容最多，持续覆盖评测、礼物指南与生活方式媒体</div>
-          </div>
-          <span class="tag tag-amber">持续发布中</span>
-        </div>
-        <div class="pm-card-stats">
-          <div class="pm-card-stat"><strong>21</strong><span>媒体资源</span></div>
-          <div class="pm-card-stat"><strong>6</strong><span>已发布内容</span></div>
-          <div class="pm-card-stat"><strong>≈ 120K+</strong><span>预估媒体曝光</span></div>
-        </div>
-        <div class="pm-media-list">
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Straits Times</span></div><span class="pm-uv hot">15.1M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Everyday Health</span></div><span class="pm-uv hot">5.2M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">HardwareZone</span></div><span class="pm-uv hot">2.2M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Letem světem Applem</span></div><span class="pm-uv hot">1.6M</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Travel + Leisure Asia</span></div><span class="pm-uv">565.3K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">GeekDad</span></div><span class="pm-uv">148.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">DNA Magazine</span></div><span class="pm-uv">134.3K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">China Gadgets Reviews</span></div><span class="pm-uv">124.6K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">TechBuzz Ireland</span></div><span class="pm-uv">41.6K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Gear43</span></div><span class="pm-uv">33K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">CooleSuggesties</span></div><span class="pm-uv">30.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Absolute Geeks</span></div><span class="pm-uv">24.2K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Wanderous Affair</span></div><span class="pm-uv">24.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Second Dad to the Right</span></div><span class="pm-uv">11.2K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">The Best of the Southwest</span></div><span class="pm-uv">6.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Steph's Cheers & Jeers</span></div><span class="pm-uv">5.8K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Product Review Cafe</span></div><span class="pm-uv">3.1K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">She's Got Issues</span></div><span class="pm-uv">2.4K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">Food Family Travel</span></div><span class="pm-uv">1.7K</span></div>
-          <div class="pm-media-row"><div class="pm-media-left"><span class="pm-product-chip pm-chip-2">PM02</span><span class="pm-media-name">NightHelper</span></div><span class="pm-uv">1K</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div id="view-global" class="view-hidden">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">59</div><div class="stat-label">26年媒体资源总数</div></div>
-      <div class="stat-card"><div class="stat-number">29</div><div class="stat-label">已发布内容</div></div>
-      <div class="stat-card"><div class="stat-number">127</div><div class="stat-label">寄样产品总数</div></div>
-      <div class="stat-card"><div class="stat-number" style="font-size:28px;">≈ 1.1M+</div><div class="stat-label">已发布预估媒体曝光</div></div>
+<main>
+  <section id="weekly" class="view">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">每周看板</h1>
+      </div>
     </div>
-    <div class="section-label">重点项目</div>
-    <details class="project-card" style="border-top:3px solid #2d5a3d;margin-bottom:32px;">
-        <summary style="list-style:none;cursor:pointer;">
-          <div class="project-card-header" style="margin-bottom:0;">
-            <div class="project-title">PM01S 媒体资源</div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <div class="tag-chips" style="margin:0;gap:4px;">
-                <span class="tag" style="background:#e8f0eb;color:#2d5a3d;">千万×3</span>
-                <span class="tag" style="background:#e8f0fa;color:#1a4a7a;">百万×6</span>
-                <span class="tag" style="background:#fdf3e0;color:#c4760a;">垂类×2</span>
-              </div>
-              <span class="tag tag-green">首批内容已发布</span>
-            </div>
-          </div>
-        </summary>
-        <div style="margin-top:14px;">
-        <div class="project-subtitle">Cold Air Ultra · 首批媒体内容已发布 · GAMES.GG / The Inspiration Grid</div>
-        <div class="media-tier-label">已发布内容</div>
-        <div class="weekly-grid" style="margin-bottom:14px;">
-          <div class="weekly-item published">
-            <span class="weekly-badge badge-published">已发布</span>
-            <div class="weekly-content">
-              <div class="weekly-title"><a href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">GAMES.GG</a></div>
-              <div class="weekly-desc">游戏媒体深度评测，聚焦雾化冷却、高速风力和户外高温使用场景</div>
-              <div class="weekly-meta" style="color:#c0392b;font-weight:600;">千万级媒体 · 10.9M UV</div>
-            </div>
-          </div>
-          <div class="weekly-item published">
-            <span class="weekly-badge badge-published">已发布</span>
-            <div class="weekly-content">
-              <div class="weekly-title"><a href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">The Inspiration Grid</a></div>
-              <div class="weekly-desc">设计媒体产品报道，突出 Cold Air Ultra 的便携冷却系统定位和夏季生活方式场景</div>
-              <div class="weekly-meta">110.8K UV</div>
-            </div>
-          </div>
-        </div>
-        <div class="media-tier-label">千万媒体</div>
-        <div class="media-grid">
-          <div class="media-row"><span class="media-name">Wirecutter</span><span class="media-uv" style="color:#c0392b;font-weight:600;">636.3M UV</span></div>
-          <div class="media-row"><span class="media-name">WIRED</span><span class="media-uv" style="color:#c0392b;font-weight:600;">17.3M UV</span></div>
-          <div class="media-row"><span class="media-name">TIME Magazine</span><span class="media-uv" style="color:#c0392b;font-weight:600;">14.8M UV</span></div>
-        </div>
-        <div class="media-tier-label">百万媒体</div>
-        <div class="media-grid">
-          <div class="media-row"><span class="media-name">Prevention</span><span class="media-uv" style="color:#c0392b;font-weight:600;">7.6M UV</span></div>
-          <div class="media-row"><span class="media-name">SlashGear</span><span class="media-uv" style="color:#c0392b;font-weight:600;">6.5M UV</span></div>
-          <div class="media-row"><span class="media-name">Numerama</span><span class="media-uv" style="color:#c0392b;font-weight:600;">6.4M UV</span></div>
-          <div class="media-row"><span class="media-name">Journal du Geek</span><span class="media-uv" style="color:#c0392b;font-weight:600;">6.2M UV</span></div>
-          <div class="media-row"><span class="media-name">Everyday Health</span><span class="media-uv" style="color:#c0392b;font-weight:600;">5.2M UV</span></div>
-          <div class="media-row"><span class="media-name">HardwareZone</span><span class="media-uv" style="color:#c0392b;font-weight:600;">2.2M UV</span></div>
-        </div>
-        <div class="media-tier-label">垂类媒体</div>
-        <div class="media-grid">
-          <div class="media-row"><span class="media-name">Techlicious</span><span class="media-uv">284.8K UV</span></div>
-          <div class="media-row"><span class="media-name">GadgetMatch</span><span class="media-uv">285.5K UV</span></div>
-        </div>
-        </div>
-    </details>
-    
-    <div class="section-label">产品线媒体覆盖</div>
-    <div class="product-table-wrap">
-      <table class="product-table">
-        <thead><tr><th>产品</th><th>寄样数</th><th>已发布</th><th>预计曝光</th></tr></thead>
-        <tbody id="g-product-tbody"><tr><td><span class="product-name">PM01S</span></td><td><span class="num-big">14</span><span class="num-label">家</span></td><td><span class="num-big">2</span><span class="num-label">篇</span></td><td><span class="exposure-text">≈ 110K+</span></td></tr><tr><td><span class="product-name">PM02</span></td><td><span class="num-big">24</span><span class="num-label">家</span></td><td><span class="num-big">7</span><span class="num-label">篇</span></td><td><span class="exposure-text">≈ 110K+</span></td></tr><tr><td><span class="product-name">NK01</span></td><td><span class="num-big">19</span><span class="num-label">家</span></td><td><span class="num-big">8</span><span class="num-label">篇</span></td><td><span class="exposure-text">≈ 18K+</span></td></tr><tr><td><span class="product-name">PK01</span></td><td><span class="num-big">15</span><span class="num-label">家</span></td><td><span class="num-big">2</span><span class="num-label">篇</span></td><td><span class="exposure-text">≈ 20K+</span></td></tr><tr><td><span class="product-name">PF04</span></td><td><span class="num-big">12</span><span class="num-label">家</span></td><td><span class="num-big">6</span><span class="num-label">篇</span></td><td><span class="exposure-text">≈ 1K+</span></td></tr></tbody>
+
+    <div class="stats">
+      <div class="stat"><div class="num">7</div><div class="label">上周新增发布</div></div>
+      <div class="stat"><div class="num">9</div><div class="label">上周新增媒体</div></div>
+      <div class="stat"><div class="num">13</div><div class="label">上周新增寄样</div></div>
+      <div class="stat"><div class="num" style="font-size:28px">≈240K+</div><div class="label">上周预估媒体曝光</div></div>
+    </div>
+
+    <div class="section">上周新增发布</div>
+    <div class="panel">
+      <table>
+        <thead><tr><th>产品</th><th>媒体</th><th>月访问量</th><th>内容类型</th><th>预估曝光</th><th>链接</th></tr></thead>
+        <tbody id="weekly-releases"><tr><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">GAMES.GG</a></td><td><span class="uv hot">10.9M</span></td><td><span class="desc">深度评测</span></td><td>≈105K</td><td><a class="link" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">查看</a></td></tr><tr><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">The Inspiration Grid</a></td><td><span class="uv ">116K</span></td><td><span class="desc">Editorial</span></td><td>≈5K</td><td><a class="link" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">查看</a></td></tr><tr><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">GadgetMatch</a></td><td><span class="uv ">259K</span></td><td><span class="desc">产品发布报道</span></td><td>≈10K</td><td><a class="link" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">查看</a></td></tr><tr><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">China Gadgets Reviews</a></td><td><span class="uv ">56K</span></td><td><span class="desc">新闻稿转载</span></td><td>≈1K</td><td><a class="link" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">查看</a></td></tr><tr><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">Cine-Techno</a></td><td><span class="uv ">6.7K</span></td><td><span class="desc">法语报道</span></td><td>≈0.2K</td><td><a class="link" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">查看</a></td></tr><tr><td><span class="chip other">PF01</span></td><td><a class="media" target="_blank" href="https://www.today.com/shop/ranked-best-handheld-fans-rcna347813">TODAY</a></td><td><span class="uv hot">16.6M</span></td><td><span class="desc">Best budget pick，Overall average score 4.25/5</span></td><td>≈120K</td><td><a class="link" target="_blank" href="https://www.today.com/shop/ranked-best-handheld-fans-rcna347813">查看</a></td></tr><tr><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">NightHelper</a></td><td><span class="uv ">1K</span></td><td><span class="desc">Blog + IG / FB / X 扩散</span></td><td>≈0.1K</td><td><a class="link" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">查看</a></td></tr></tbody>
       </table>
     </div>
-    <div class="section-label">指南内容追踪</div>
-    <div class="guide-summary-bar" id="g-guide-summary"><div class="gsb-cell"><div class="gsb-num">17</div><div class="gsb-label">媒体总数</div></div><div class="gsb-cell"><div class="gsb-num">8</div><div class="gsb-label">已发布</div></div><div class="gsb-cell"><div class="gsb-num">9</div><div class="gsb-label">待发布</div></div><div class="gsb-cell"><div class="gsb-num" style="font-size:22px;">≈ 20K+</div><div class="gsb-label">总曝光预估</div></div></div>
-    <div class="guides-grid" id="g-guides-grid"><div class="guide-card"><div class="guide-title"><span>🎁</span><span>礼物清单</span></div><div class="guide-stats"><div class="guide-stat"><strong>5</strong>已发布</div><div class="guide-stat"><strong>2</strong>待发布</div></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Steph's Cheers &amp; Jeers</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Best of the Southwest</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Life with Kathy</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Joni Sweet @ Yahoo Creators</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">The Maria Liberati Show</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">foodfamilytravel.com</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">shesgotissues.com</span></div><span class="tag tag-green">已发布</span></div></div><div class="guide-card"><div class="guide-title"><span>☀️</span><span>夏日装备指南</span></div><div class="guide-stats"><div class="guide-stat"><strong>2</strong>已发布</div><div class="guide-stat"><strong>3</strong>待发布</div></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Live Grow Play</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">Life with Kathy</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">wanderousaffair.com</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">dnamagazine.com.au</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">creators.com/content</span></div><span class="tag tag-amber">待发布</span></div></div><div class="guide-card"><div class="guide-title"><span>📖</span><span>常态化指南</span></div><div class="guide-stats"><div class="guide-stat"><strong>1</strong>已发布</div><div class="guide-stat"><strong>4</strong>待发布</div></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">runawaytraveller.com</span></div><span class="tag tag-green">已发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">travelandleisureasia.com</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">seconddadtotheright.com</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">iambrownstyle.com</span></div><span class="tag tag-amber">待发布</span></div><div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">sawthisthoughtofyou.substack</span></div><span class="tag tag-amber">待发布</span></div></div></div>
 
-  </div>
-
-  <div id="view-weekly" class="">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">上周新增发布</div></div>
-      <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">上周新增媒体</div></div>
-      <div class="stat-card"><div class="stat-number">18</div><div class="stat-label">上周新增寄样</div></div>
-      <div class="stat-card"><div class="stat-number" style="font-size:28px;">≈ 460K+</div><div class="stat-label">上周预估媒体曝光</div></div>
-    </div>
-    <div class="section-label">上周发布 · 5月 W4</div>
-    <div class="weekly-grid">
-      <div class="weekly-item published">
-        <span class="weekly-badge badge-published">已发布</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://www.wired.com/story/the-best-fans-2026/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">WIRED</a> · TB01</div>
-          <div class="weekly-desc">TB01 评为宿舍必备产品</div>
-          <div class="weekly-meta" style="color:#c0392b;font-weight:600;">千万级媒体 · 17.3M UV</div>
-        </div>
-      </div>
-      <div class="weekly-item published">
-        <span class="weekly-badge badge-published">已发布</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://nypost.com/2026/05/26/shopping/sharks-portable-misting-fan-is-50-off-before-summer-heat-hits/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">New York Post</a> · PB01</div>
-          <div class="weekly-desc">导购型推荐 PB01，带亚马逊链接</div>
-          <div class="weekly-meta" style="color:#c0392b;font-weight:600;">千万级媒体 · 94.3M UV</div>
-        </div>
-      </div>
-      <div class="weekly-item published">
-        <span class="weekly-badge badge-published">已发布</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://www.t3.com/home-living/appliances/7-best-fan-deals-to-beat-the-bank-holiday-heat-from-dyson-shark-meaco-and-more" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">T3</a> · PE01</div>
-          <div class="weekly-desc">导购型内容，提及 PE01</div>
-          <div class="weekly-meta" style="color:#c0392b;font-weight:600;">4.3M UV</div>
-        </div>
-      </div>
-    </div>
-    <div class="section-label">PM01S 重点媒体内容</div>
-    <div class="weekly-grid">
-      <div class="weekly-item published">
-        <span class="weekly-badge badge-published">已发布</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">GAMES.GG</a></div>
-          <div class="weekly-desc">游戏媒体深度评测，聚焦雾化冷却、高速风力和户外高温使用场景</div>
-          <div class="weekly-meta" style="color:#c0392b;font-weight:600;">千万级媒体 · 10.9M UV</div>
-        </div>
-      </div>
-      <div class="weekly-item published">
-        <span class="weekly-badge badge-published">已发布</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">The Inspiration Grid</a></div>
-          <div class="weekly-desc">设计媒体产品报道，突出 Cold Air Ultra 的便携冷却系统定位和夏季生活方式场景</div>
-          <div class="weekly-meta">110.8K UV</div>
-        </div>
-      </div>
-    </div>
-    <div class="section-label">上周新增媒体</div>
-    <div class="weekly-grid">
-      <div class="weekly-item added">
-        <span class="weekly-badge badge-added">新增</span>
-        <div class="weekly-content">
-          <div class="weekly-title">TomsGuide</div>
-          <div class="weekly-desc">PM01S · PM02 · TB01</div>
-          <div class="weekly-meta" style="color:#c0392b;font-weight:600;">23.8M UV</div>
-        </div>
-      </div>
-      <div class="weekly-item added">
-        <span class="weekly-badge badge-added">新增</span>
-        <div class="weekly-content">
-          <div class="weekly-title">Joy Filled Eats</div>
-          <div class="weekly-desc">PM01 · PF04</div>
-          <div class="weekly-meta">244K UV</div>
-        </div>
-      </div>
-      <div class="weekly-item added">
-        <span class="weekly-badge badge-added">新增</span>
-        <div class="weekly-content">
-          <div class="weekly-title"><a href="https://www.pmc.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">pmc.com</a></div>
-          <div class="weekly-desc">PM01S · PM02 · TB01 · TE01 · NK01 · PF04 · PK01-F1</div>
-          <div class="weekly-meta">145K UV</div>
-        </div>
-      </div>
-      <div class="weekly-item added">
-        <span class="weekly-badge badge-added">新增</span>
-        <div class="weekly-content">
-          <div class="weekly-title">5d-blog.com</div>
-          <div class="weekly-desc">NK01 · PF04 · PK01-F1</div>
-          <div class="weekly-meta">7.3K UV</div>
-        </div>
-      </div>
-      <div class="weekly-item added">
-        <span class="weekly-badge badge-added">新增</span>
-        <div class="weekly-content">
-          <div class="weekly-title">Product Review Cafe</div>
-          <div class="weekly-desc">PM02 · PK01 · NK01</div>
-          <div class="weekly-meta">3.1K UV</div>
-        </div>
-      </div>
-    </div>
-    <div class="section-label">最新进展</div>
-    <div class="weekly-grid">
-      <div class="weekly-item progress">
-        <span class="weekly-badge badge-progress">新闻稿</span>
-        <div class="weekly-content">
-          <div class="weekly-title">PM01S 全网首发新闻稿</div>
-          <div class="weekly-desc">美通社 / 供应商渠道 6.1 发布 · EIN 6.2 发布</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-japan" class="view-hidden">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">5月新闻稿规划</div></div>
-      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">已发布</div></div>
-      <div class="stat-card"><div class="stat-number">77</div><div class="stat-label">媒体转载量</div></div>
-      <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">新增合作媒体</div></div>
-    </div>
-    <div class="section-label">PR TIMES 新闻稿排期</div>
-    <div class="prtimes-table-wrap">
-      <table class="prtimes-table">
-        <thead><tr><th>时间</th><th>新闻稿标题</th><th>主推产品</th><th>状态</th></tr></thead>
-        <tbody id="jp-prtimes-tbody"><tr class="row-published"><td><span class="pr-time">5月 W1</span></td><td><span class="pr-title">【母の日ギフト】機能性とデザイン性を兼ね備えた、上質な「涼しさのプレゼント」</span></td><td><span class="pr-product">PF04・PM02</span></td><td><span class="tag tag-green">已发布</span></td></tr><tr class="row-published"><td><span class="pr-time">5月 W2</span></td><td><span class="pr-title">Aecooly「Chic」卓上ファン——手のひらサイズで、デスクに本格送風を</span></td><td><span class="pr-product">TE01</span></td><td><span class="tag tag-green">已发布</span></td></tr><tr class="row-published"><td><span class="pr-time">5月 W3</span></td><td><span class="pr-title">Aecooly、2,000円以下のハンディファンを発売。Amazonでクーポン適用</span></td><td><span class="pr-product">PE01</span></td><td><span class="tag tag-green">已发布</span></td></tr><tr class="row-pending"><td><span class="pr-time">5月 W4</span></td><td><span class="pr-title">【Aecooly】冷却プレート搭載のハンディファン新発売<br>屋外での熱中症対策に</span></td><td><span class="pr-product">PC01</span></td><td><span class="tag tag-amber">待发布</span></td></tr></tbody>
+    <div class="section">上周新增媒体</div>
+    <div class="panel">
+      <table>
+        <thead><tr><th>媒体</th><th>月访问量</th><th>寄样产品</th><th>来源 / 备注</th></tr></thead>
+        <tbody id="weekly-media"><tr><td><a class="media" target="_blank" href="https://www.scarymommy.com/">Scary Mommy</a></td><td><span class="uv hot">1.7M</span></td><td>PM01S / PM02 / TB01</td><td><span class="desc">Qwoted 资源</span></td></tr><tr><td><a class="media" target="_blank" href="https://eastendtaste.com/">East End Taste</a></td><td><span class="uv ">2.7K</span></td><td>PM02 世界杯定制款</td><td><span class="desc">Qwoted 资源，世界杯必备好物指南</span></td></tr><tr><td><a class="media" target="_blank" href="https://naekranie.pl/">naEKRANIE.pl</a></td><td><span class="uv hot">3.3M</span></td><td>PM01 / TB01 / PF01</td><td><span class="desc">百万媒体</span></td></tr><tr><td><a class="media" target="_blank" href="https://newyorklifestylesmagazine.com/">New York Lifestyles Magazine</a></td><td><span class="uv ">14.4K</span></td><td>PM01</td><td><span class="desc">Qwoted 资源</span></td></tr><tr><td><a class="media" target="_blank" href="https://www.maison-et-domotique.com/es/">Maison et Domotique</a></td><td><span class="uv ">64.7K</span></td><td>PM01</td><td><span class="desc">西语站点</span></td></tr><tr><td><a class="media" target="_blank" href="https://www.theroamreport.com/">The Roam Report</a></td><td><span class="uv ">2.3K</span></td><td>PM01</td><td><span class="desc">Qwoted 资源</span></td></tr><tr><td><a class="media" target="_blank" href="https://www.burlapandblue.com/">Burlap and Blue</a></td><td><span class="uv ">36.4K</span></td><td>PM02</td><td><span class="desc">Qwoted 资源</span></td></tr><tr><td><a class="media" target="_blank" href="https://cine-techno.com/">Cine-Techno</a></td><td><span class="uv ">6.7K</span></td><td>PM01</td><td><span class="desc">法语媒体</span></td></tr><tr><td><a class="media" target="_blank" href="https://gamedaily.com/">GameDaily</a></td><td><span class="uv ">146K</span></td><td>PM02 法国款</td><td><span class="desc">媒体资源</span></td></tr></tbody>
       </table>
     </div>
-    <div class="section-label">媒体资源 · 主动合作（免费）</div>
-    <div class="jp-media-grid">
-      <div class="jp-media-card">
-        <div class="jp-media-type">区域生活权威媒体</div>
-        <div class="jp-media-name"><a href="https://mrs.living.jp/fukuoka" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Living 福冈</a></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">媒体属性</span><span>九州地区核心生活周刊</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">受众</span><span>掌控家庭财政权的主妇群体</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">合作形式</span><span>读者礼品置换（3 台产品换取 WEB 专题报道）</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">产品型号</span><span>PE01</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">月访问量</span><span style="color:#c0392b;font-weight:600;">百万媒体</span></div>
-        <div class="jp-card-footer"><span class="tag tag-blue">样品已寄出 · 图片素材准备</span></div>
+
+    <div class="section">上周重点进展</div>
+    <div class="panel progress">
+      <div class="progress-title">PM01S 首批媒体内容已发布</div>
+      <p>GAMES.GG / The Inspiration Grid / GadgetMatch / China Gadgets Reviews / Cine-Techno 已发布，覆盖游戏、设计、科技及法语媒体。</p>
+    </div>
+
+    <div class="section">折扣码转化反馈</div>
+    <div class="conversion">
+      <div class="panel"><div class="source"><strong>GadgetMatch</strong><span>已产生折扣码使用</span></div></div>
+      <div class="panel"><div class="source"><strong>官方新闻稿</strong><span>已产生折扣码使用</span></div></div>
+    </div>
+
+    <div class="section">本周动作</div>
+    <div class="split">
+      <div class="panel progress">
+        <div class="progress-title">PM01S 新一轮主题稿</div>
+        <p>结合近期全球高温新闻环境，强化 Cold Air Ultra 快速体感降温与随身冷却系统定位，预计 6.10 发布并同步 Blog。</p>
       </div>
-      <div class="jp-media-card">
-        <div class="jp-media-type">美容院垂直小媒体</div>
-        <div class="jp-media-name"><a href="https://bi-to-be.com/" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">美toBE</a></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">媒体属性</span><span>高端美容院专用刊物</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">覆盖场景</span><span>美容、SPA 等高消费女性场景</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">合作形式</span><span>产品置换报道（无需额外费用）</span></div>
-        <div class="jp-meta-row"><span class="jp-meta-key">产品型号</span><span>PM02</span></div>
-        <div class="jp-card-footer"><span class="tag tag-amber">推进中 · 对接刊登周期及寄送地址</span></div>
+      <div class="panel progress amber">
+        <div class="progress-title">PM 系列官网 Blog 规划</div>
+        <p>围绕 PM01S / PM02 的产品卖点与媒体内容反馈，整理官网 Blog 更新计划，用于强化产品认知、使用场景和品牌内容沉淀。</p>
       </div>
     </div>
-    <div class="section-label">合作评估</div>
-    <div class="jp-skipped-card">
-      <div class="skipped-header">
-        <div class="skipped-icon">🔍</div>
-        <div>
-          <div class="skipped-title">小型数码电子展会</div>
-          <div class="skipped-url"><a href="https://drive.google.com/file/d/1sPww9i0GWMlE_vEJsvAWP7YnmP6cbptH/view" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">具体提案</a> · 访问约 2,000 人</div>
-        </div>
-        <span class="tag tag-blue" style="margin-left:auto;align-self:flex-start">评估中</span>
-      </div>
-      <div class="skipped-reason">便携屏品牌参考案例涨粉 1,000，小米 / 图拉斯均有参加。权益包含社媒宣传、一个最小桌子用于产品展示、工作人员协助讲解，并可回收现场素材和报告。</div>
-      <div class="skipped-pricing">
-        <div class="price-cell"><div class="price-cell-label">最低报价</div><div class="price-cell-val">¥4,500</div><div class="price-cell-sub">RMB</div></div>
-        <div class="price-cell"><div class="price-cell-label">合作形式</div><div class="price-cell-val" style="font-size:13px;font-weight:500;">展会露出 + 社媒帖子宣传</div><div class="price-cell-sub">营销活动</div></div>
-        <div class="price-cell"><div class="price-cell-label">预计触达</div><div class="price-cell-val">2,000</div><div class="price-cell-sub">展会访问人数</div></div>
+  </section>
+
+  <section id="pm" class="view hidden">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">PM 系列</h1>
+        <div class="page-sub">PM01S / PM01 / PM02 的已发布内容与媒体资源库。</div>
       </div>
     </div>
-  </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">41+</div><div class="label">PM 系列媒体资源</div></div>
+      <div class="stat"><div class="num">13</div><div class="label">已发布内容</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">覆盖型号</div></div>
+      <div class="stat"><div class="num" style="font-size:28px">≈240K+</div><div class="label">已发布预估媒体曝光</div></div>
+    </div>
+
+    <div class="section">产品主线</div>
+    <div class="thread-grid">
+      <div class="thread">
+        <div class="thread-top"><div><div class="thread-name">PM01S / PM01</div><div class="thread-sub">Cold Air Ultra 主线，PM01S 资源与 PM01 关联媒体合并展示。</div></div><span class="chip published">持续发布</span></div>
+        <div class="mini-stats"><div class="mini"><strong>20+</strong><span>媒体资源</span></div><div class="mini"><strong>5</strong><span>已发布内容</span></div><div class="mini"><strong>≈120K+</strong><span>预估曝光</span></div></div>
+      </div>
+      <div class="thread pm02-line">
+        <div class="thread-top"><div><div class="thread-name">PM02</div><div class="thread-sub">High-Speed Misting Fan 主线，覆盖评测、礼物指南与生活方式媒体。</div></div><span class="chip pm02">持续发布</span></div>
+        <div class="mini-stats"><div class="mini"><strong>21+</strong><span>媒体资源</span></div><div class="mini"><strong>8</strong><span>已发布内容</span></div><div class="mini"><strong>≈120K+</strong><span>预估曝光</span></div></div>
+      </div>
+    </div>
+
+    <div class="section">PM 系列已发布内容</div>
+    <div class="panel">
+      <table>
+        <thead><tr><th>日期</th><th>产品</th><th>媒体</th><th>标题</th><th>月访问量</th><th>语言</th><th>链接</th></tr></thead>
+        <tbody id="pm-published"><tr><td>2026-4-13</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/">Absolute Geeks</a></td><td><span class="desc">Aecooly’s Misting Fan and Phone Fan Duo review: the ultimate portable cooling combo built for the UAE heat</span></td><td><span class="uv ">32.7K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/">查看</a></td></tr><tr><td>2026-4-23</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/">Steph's Cheers &amp; Jeers</a></td><td><span class="desc">2026 Mother’s Day Gift Guide</span></td><td><span class="uv ">5.8K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/">查看</a></td></tr><tr><td>2026-4-28</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://techbuzzireland.com/2026/04/28/aecooly-portable-misting-cold-air-fan-review/">TechBuzz Ireland</a></td><td><span class="desc">Aecooly Portable Misting Cold Air Fan Review</span></td><td><span class="uv ">41.6K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://techbuzzireland.com/2026/04/28/aecooly-portable-misting-cold-air-fan-review/">查看</a></td></tr><tr><td>2026-5-4</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://shesgotissues.com/mothers-day-gift-guide-bundles-shell-actually-want-and-use/">She's Got Issues</a></td><td><span class="desc">Mother’s Day Gift Guide: Bundles She’ll Actually Want (and Use)</span></td><td><span class="uv ">2.7K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://shesgotissues.com/mothers-day-gift-guide-bundles-shell-actually-want-and-use/">查看</a></td></tr><tr><td>2026-5-5</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html">China Gadgets Reviews</a></td><td><span class="desc">Aecooly Cold Air Portable High-Speed Misting Fan</span></td><td><span class="uv ">124.6K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html">查看</a></td></tr><tr><td>2026-5-5</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-">Best of the Southwest</a></td><td><span class="desc">Mothers day gift guide 2026</span></td><td><span class="uv ">6.1K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-">查看</a></td></tr><tr><td>2026-5-11</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat">Straits Times</a></td><td><span class="desc">Beat the heat: 7 handheld fans tested in real-world heat</span></td><td><span class="uv hot">15.1M</span></td><td>EN</td><td><a class="link" target="_blank" href="https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat">查看</a></td></tr><tr><td>2026-5-28</td><td><span class="chip pm02">PM02</span></td><td><a class="media" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">NightHelper</a></td><td><span class="desc">Hottest Summer Products You’ll Need To Add This Year!</span></td><td><span class="uv ">1K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">查看</a></td></tr><tr><td>2026-6-1</td><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">GAMES.GG</a></td><td><span class="desc">Aecooly Cold Air Ultra Review 2026</span></td><td><span class="uv hot">10.9M</span></td><td>EN</td><td><a class="link" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">查看</a></td></tr><tr><td>2026-6-2</td><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">The Inspiration Grid</a></td><td><span class="desc">Aecooly Launches Cold Air Ultra, A Pocket-Sized Cooling System for Summer Heat</span></td><td><span class="uv ">116K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">查看</a></td></tr><tr><td>2026-6-3</td><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">GadgetMatch</a></td><td><span class="desc">The Aecooly Cold Air Ultra can chill your skin in ten seconds</span></td><td><span class="uv ">259K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">查看</a></td></tr><tr><td>2026-6-3</td><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">China Gadgets Reviews</a></td><td><span class="desc">Aecooly Launches the Cold Air Ultra Personal Cooling System</span></td><td><span class="uv ">56K</span></td><td>EN</td><td><a class="link" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">查看</a></td></tr><tr><td>2026-6-4</td><td><span class="chip pm01s">PM01S</span></td><td><a class="media" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">Cine-Techno</a></td><td><span class="desc">Aecooly Cold Air Ultra : Le climatiseur de poche qui fait chuter la température de 10°C en 10 secondes</span></td><td><span class="uv ">6.7K</span></td><td>French</td><td><a class="link" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">查看</a></td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="section">媒体资源库</div>
+    <div class="panel">
+      <table>
+        <thead><tr><th>媒体</th><th>产品</th><th>月访问量</th><th>状态</th><th>链接</th></tr></thead>
+        <tbody id="pm-resources"><tr><td><a class="media" target="_blank" href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/">Absolute Geeks</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">32.7K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/">Steph's Cheers &amp; Jeers</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">5.8K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://stephscheersandjeers.com/2026-mothers-day-gift-guide/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://techbuzzireland.com/2026/04/28/aecooly-portable-misting-cold-air-fan-review/">TechBuzz Ireland</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">41.6K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://techbuzzireland.com/2026/04/28/aecooly-portable-misting-cold-air-fan-review/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://shesgotissues.com/mothers-day-gift-guide-bundles-shell-actually-want-and-use/">She's Got Issues</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">2.7K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://shesgotissues.com/mothers-day-gift-guide-bundles-shell-actually-want-and-use/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html">China Gadgets Reviews</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">124.6K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-">Best of the Southwest</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">6.1K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat">Straits Times</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv hot">15.1M</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">NightHelper</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">1K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">GAMES.GG</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">10.9M</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">The Inspiration Grid</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv ">116K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">GadgetMatch</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv ">259K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">China Gadgets Reviews</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv ">56K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">Cine-Techno</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv ">6.7K</span></td><td><span class="chip published">已发布</span></td><td><a class="link" target="_blank" href="https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.nytimes.com/wirecutter/">Wirecutter</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">636.3M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.nytimes.com/wirecutter/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.tomsguide.com/">TomsGuide</a></td><td><span class="chip pm01s">PM01S / PM02</span></td><td><span class="uv hot">23.8M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.tomsguide.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.wired.com/">WIRED</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">17.3M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.wired.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://time.com/">TIME Magazine</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">14.8M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://time.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.prevention.com/">Prevention</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">7.6M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.prevention.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.slashgear.com/">SlashGear</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">6.5M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.slashgear.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.numerama.com/">Numerama</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">6.4M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.numerama.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.journaldugeek.com/">Journal du Geek</a></td><td><span class="chip pm01s">PM01S</span></td><td><span class="uv hot">6.2M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.journaldugeek.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.everydayhealth.com/">Everyday Health</a></td><td><span class="chip pm01s">PM01S / PM02</span></td><td><span class="uv hot">5.2M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.everydayhealth.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.hardwarezone.com.sg/">HardwareZone</a></td><td><span class="chip pm01s">PM01S / PM02</span></td><td><span class="uv hot">2.2M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.hardwarezone.com.sg/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.scarymommy.com/">Scary Mommy</a></td><td><span class="chip pm01s">PM01S / PM02 / TB01</span></td><td><span class="uv hot">1.7M</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.scarymommy.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.travelandleisureasia.com/sea/">Travel + Leisure Asia</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">565.3K</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.travelandleisureasia.com/sea/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://joyfilledeats.com/">Joy Filled Eats</a></td><td><span class="chip pm01">PM01</span></td><td><span class="uv ">244K</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://joyfilledeats.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://geekdad.com/">GeekDad</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">148.1K</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://geekdad.com/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://www.dnamagazine.com.au/">DNA Magazine</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">134.3K</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://www.dnamagazine.com.au/">查看</a></td></tr><tr><td><a class="media" target="_blank" href="https://productreviewcafe.com/">Product Review Cafe</a></td><td><span class="chip pm02">PM02</span></td><td><span class="uv ">3.1K</span></td><td><span class="chip resource">待发布</span></td><td><a class="link" target="_blank" href="https://productreviewcafe.com/">查看</a></td></tr></tbody>
+      </table>
+    </div>
+  </section>
 </main>
+
 <script>
-const TAG_CLASS={'已发布':'tag-green','待发布':'tag-amber','进行中':'tag-blue','跟进中':'tag-amber','规划中':'tag-gray','内容待解禁':'tag-amber','待统计':'tag-gray','制作中':'tag-amber','评测进行中':'tag-blue','洽谈中':'tag-gray','持续':'tag-blue','已完成':'tag-green','暂停':'tag-gray','待确认':'tag-gray'};
-function makeTag(s){return `<span class="tag ${TAG_CLASS[s]||'tag-gray'}">${s}</span>`;}
-const data={
-  products:[
-    {name:'PM01S',media:14,published:2,exposure:'≈ 110K+'},
-    {name:'PM02',media:24,published:7,exposure:'≈ 110K+'},
-    {name:'NK01',media:19,published:8,exposure:'≈ 18K+'},
-    {name:'PK01',media:15,published:2,exposure:'≈ 20K+'},
-    {name:'PF04',media:12,published:6,exposure:'≈ 1K+'},
-  ],
-  guides:[
-    {emoji:'🎁',title:'礼物清单',subGroups:[{label:'',items:[
-      {name:"Steph's Cheers & Jeers",status:'已发布',link:''},
-      {name:'Best of the Southwest',status:'已发布',link:''},
-      {name:'Life with Kathy',status:'已发布',link:''},
-      {name:'Joni Sweet @ Yahoo Creators',status:'已发布',link:''},
-      {name:'The Maria Liberati Show',status:'待发布',link:''},
-      {name:'foodfamilytravel.com',status:'待发布',link:''},
-      {name:'shesgotissues.com',status:'已发布',link:''},
-    ]}]},
-    {emoji:'☀️',title:'夏日装备指南',subGroups:[{label:'',items:[
-      {name:'Live Grow Play',status:'已发布',link:''},
-      {name:'Life with Kathy',status:'已发布',link:''},
-      {name:'wanderousaffair.com',status:'待发布',link:''},
-      {name:'dnamagazine.com.au',status:'待发布',link:''},
-      {name:'creators.com/content',status:'待发布',link:''},
-    ]}]},
-    {emoji:'📖',title:'常态化指南',subGroups:[{label:'',items:[
-      {name:'runawaytraveller.com',status:'已发布',link:''},
-      {name:'travelandleisureasia.com',status:'待发布',link:''},
-      {name:'seconddadtotheright.com',status:'待发布',link:''},
-      {name:'iambrownstyle.com',status:'待发布',link:''},
-      {name:'sawthisthoughtofyou.substack',status:'待发布',link:''},
-    ]}]},
-  ],
-
-  prtimes:[
-    {time:'5月 W1',title:'【母の日ギフト】機能性とデザイン性を兼ね備えた、上質な「涼しさのプレゼント」',product:'PF04・PM02',status:'已发布'},
-    {time:'5月 W2',title:'Aecooly「Chic」卓上ファン——手のひらサイズで、デスクに本格送風を',product:'TE01',status:'已发布'},
-    {time:'5月 W3',title:'Aecooly、2,000円以下のハンディファンを発売。Amazonでクーポン適用',product:'PE01',status:'已发布'},
-    {time:'5月 W4',title:'【Aecooly】冷却プレート搭載のハンディファン新発売<br>屋外での熱中症対策に',product:'PC01',status:'待发布'},
-  ]
-};
-function renderProducts(){
-  const tb=document.getElementById('g-product-tbody');tb.innerHTML='';
-  data.products.forEach(p=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td><span class="product-name">${p.name}</span></td><td><span class="num-big">${p.media}</span><span class="num-label">家</span></td><td><span class="num-big">${p.published}</span><span class="num-label">篇</span></td><td><span class="exposure-text">${p.exposure}</span></td>`;
-    tb.appendChild(tr);
-  });
+const weeklyReleases=[
+ ['PM01S','GAMES.GG','10.9M','深度评测','≈105K','https://games.gg/news/aecooly-cold-air-ultra-review-2026/'],
+ ['PM01S','The Inspiration Grid','116K','Editorial','≈5K','https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/'],
+ ['PM01S','GadgetMatch','259K','产品发布报道','≈10K','https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/'],
+ ['PM01S','China Gadgets Reviews','56K','新闻稿转载','≈1K','https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html'],
+ ['PM01S','Cine-Techno','6.7K','法语报道','≈0.2K','https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/'],
+ ['PF01','TODAY','16.6M','Best budget pick，Overall average score 4.25/5','≈120K','https://www.today.com/shop/ranked-best-handheld-fans-rcna347813'],
+ ['PM02','NightHelper','1K','Blog + IG / FB / X 扩散','≈0.1K','https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/']
+];
+const weeklyMedia=[
+ ['Scary Mommy','1.7M','PM01S / PM02 / TB01','Qwoted 资源','https://www.scarymommy.com/'],
+ ['East End Taste','2.7K','PM02 世界杯定制款','Qwoted 资源，世界杯必备好物指南','https://eastendtaste.com/'],
+ ['naEKRANIE.pl','3.3M','PM01 / TB01 / PF01','百万媒体','https://naekranie.pl/'],
+ ['New York Lifestyles Magazine','14.4K','PM01','Qwoted 资源','https://newyorklifestylesmagazine.com/'],
+ ['Maison et Domotique','64.7K','PM01','西语站点','https://www.maison-et-domotique.com/es/'],
+ ['The Roam Report','2.3K','PM01','Qwoted 资源','https://www.theroamreport.com/'],
+ ['Burlap and Blue','36.4K','PM02','Qwoted 资源','https://www.burlapandblue.com/'],
+ ['Cine-Techno','6.7K','PM01','法语媒体','https://cine-techno.com/'],
+ ['GameDaily','146K','PM02 法国款','媒体资源','https://gamedaily.com/']
+];
+const pmPublished=[
+ ['2026-4-13','PM02','Absolute Geeks','Aecooly’s Misting Fan and Phone Fan Duo review: the ultimate portable cooling combo built for the UAE heat','32.7K','EN','https://www.absolutegeeks.com/article/reviews/aecoolys-misting-fan-and-phone-fan-duo-review-uaes-ultimate-portable-cooling-combo/'],
+ ['2026-4-23','PM02',"Steph's Cheers & Jeers",'2026 Mother’s Day Gift Guide','5.8K','EN','https://stephscheersandjeers.com/2026-mothers-day-gift-guide/'],
+ ['2026-4-28','PM02','TechBuzz Ireland','Aecooly Portable Misting Cold Air Fan Review','41.6K','EN','https://techbuzzireland.com/2026/04/28/aecooly-portable-misting-cold-air-fan-review/'],
+ ['2026-5-4','PM02',"She's Got Issues",'Mother’s Day Gift Guide: Bundles She’ll Actually Want (and Use)','2.7K','EN','https://shesgotissues.com/mothers-day-gift-guide-bundles-shell-actually-want-and-use/'],
+ ['2026-5-5','PM02','China Gadgets Reviews','Aecooly Cold Air Portable High-Speed Misting Fan','124.6K','EN','https://chinagadgetsreviews.com/unboxing-aecooly-cold-air-portable-high-speed-misting-fan.html'],
+ ['2026-5-5','PM02','Best of the Southwest','Mothers day gift guide 2026','6.1K','EN','https://thebestofthesouthwest.com/shopping/mothers-day-gift-guide-2026-unique-thoughtful-gifts-shell-love/-'],
+ ['2026-5-11','PM02','Straits Times','Beat the heat: 7 handheld fans tested in real-world heat','15.1M','EN','https://www.straitstimes.com/life/travel/beat-the-heat-7-handheld-fans-tested-in-real-world-heat'],
+ ['2026-5-28','PM02','NightHelper','Hottest Summer Products You’ll Need To Add This Year!','1K','EN','https://nighthelper.com/hottest-summer-products-youll-need-to-add-this-year/'],
+ ['2026-6-1','PM01S','GAMES.GG','Aecooly Cold Air Ultra Review 2026','10.9M','EN','https://games.gg/news/aecooly-cold-air-ultra-review-2026/'],
+ ['2026-6-2','PM01S','The Inspiration Grid','Aecooly Launches Cold Air Ultra, A Pocket-Sized Cooling System for Summer Heat','116K','EN','https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/'],
+ ['2026-6-3','PM01S','GadgetMatch','The Aecooly Cold Air Ultra can chill your skin in ten seconds','259K','EN','https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/'],
+ ['2026-6-3','PM01S','China Gadgets Reviews','Aecooly Launches the Cold Air Ultra Personal Cooling System','56K','EN','https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html'],
+ ['2026-6-4','PM01S','Cine-Techno','Aecooly Cold Air Ultra : Le climatiseur de poche qui fait chuter la température de 10°C en 10 secondes','6.7K','French','https://cine-techno.com/wp/2026/06/03/aecooly-cold-air-ultra-le-climatiseur-de-poche-qui-fait-chuter-la-temperature-de-10c-en-10-secondes/']
+];
+const pmResources=[
+ ...pmPublished.map(r=>[r[2],r[1],r[4],'已发布',r[6]]),
+ ['Wirecutter','PM01S','636.3M','待发布','https://www.nytimes.com/wirecutter/'],
+ ['TomsGuide','PM01S / PM02','23.8M','待发布','https://www.tomsguide.com/'],
+ ['WIRED','PM01S','17.3M','待发布','https://www.wired.com/'],
+ ['TIME Magazine','PM01S','14.8M','待发布','https://time.com/'],
+ ['Prevention','PM01S','7.6M','待发布','https://www.prevention.com/'],
+ ['SlashGear','PM01S','6.5M','待发布','https://www.slashgear.com/'],
+ ['Numerama','PM01S','6.4M','待发布','https://www.numerama.com/'],
+ ['Journal du Geek','PM01S','6.2M','待发布','https://www.journaldugeek.com/'],
+ ['Everyday Health','PM01S / PM02','5.2M','待发布','https://www.everydayhealth.com/'],
+ ['HardwareZone','PM01S / PM02','2.2M','待发布','https://www.hardwarezone.com.sg/'],
+ ['Scary Mommy','PM01S / PM02 / TB01','1.7M','待发布','https://www.scarymommy.com/'],
+ ['Travel + Leisure Asia','PM02','565.3K','待发布','https://www.travelandleisureasia.com/sea/'],
+ ['Joy Filled Eats','PM01','244K','待发布','https://joyfilledeats.com/'],
+ ['GeekDad','PM02','148.1K','待发布','https://geekdad.com/'],
+ ['DNA Magazine','PM02','134.3K','待发布','https://www.dnamagazine.com.au/'],
+ ['Product Review Cafe','PM02','3.1K','待发布','https://productreviewcafe.com/']
+];
+function productChip(p){
+ if(p.includes('PM01S')) return '<span class="chip pm01s">'+p+'</span>';
+ if(p==='PM01') return '<span class="chip pm01">'+p+'</span>';
+ if(p.includes('PM02')) return '<span class="chip pm02">'+p+'</span>';
+ return '<span class="chip other">'+p+'</span>';
 }
-function renderGuideSummary(){
-  const bar=document.getElementById('g-guide-summary');
-  let total=0,pub=0,pend=0;
-  data.guides.forEach(g=>g.subGroups.forEach(sg=>sg.items.forEach(it=>{total++;if(it.status==='已发布')pub++;else pend++;})));
-  bar.innerHTML=`<div class="gsb-cell"><div class="gsb-num">${total}</div><div class="gsb-label">媒体总数</div></div><div class="gsb-cell"><div class="gsb-num">${pub}</div><div class="gsb-label">已发布</div></div><div class="gsb-cell"><div class="gsb-num">${pend}</div><div class="gsb-label">待发布</div></div><div class="gsb-cell"><div class="gsb-num" style="font-size:22px;">≈ 20K+</div><div class="gsb-label">总曝光预估</div></div>`;
+function uv(v){return '<span class="uv '+(v.includes('M')?'hot':'')+'">'+v+'</span>'}
+function view(url){return url?'<a class="link" target="_blank" href="'+url+'">查看</a>':''}
+function render(){
+ document.querySelector('#weekly-releases').innerHTML=weeklyReleases.map(r=>'<tr><td>'+productChip(r[0])+'</td><td><a class="media" target="_blank" href="'+r[5]+'">'+r[1]+'</a></td><td>'+uv(r[2])+'</td><td><span class="desc">'+r[3]+'</span></td><td>'+r[4]+'</td><td>'+view(r[5])+'</td></tr>').join('');
+ document.querySelector('#weekly-media').innerHTML=weeklyMedia.map(r=>'<tr><td><a class="media" target="_blank" href="'+r[4]+'">'+r[0]+'</a></td><td>'+uv(r[1])+'</td><td>'+r[2]+'</td><td><span class="desc">'+r[3]+'</span></td></tr>').join('');
+ document.querySelector('#pm-published').innerHTML=pmPublished.map(r=>'<tr><td>'+r[0]+'</td><td>'+productChip(r[1])+'</td><td><a class="media" target="_blank" href="'+r[6]+'">'+r[2]+'</a></td><td><span class="desc">'+r[3]+'</span></td><td>'+uv(r[4])+'</td><td>'+r[5]+'</td><td>'+view(r[6])+'</td></tr>').join('');
+ document.querySelector('#pm-resources').innerHTML=pmResources.map(r=>'<tr><td><a class="media" target="_blank" href="'+r[4]+'">'+r[0]+'</a></td><td>'+productChip(r[1])+'</td><td>'+uv(r[2])+'</td><td><span class="chip '+(r[3]==='已发布'?'published':'resource')+'">'+r[3]+'</span></td><td>'+view(r[4])+'</td></tr>').join('');
 }
-function renderGuides(){
-  renderGuideSummary();
-  const grid=document.getElementById('g-guides-grid');grid.innerHTML='';
-  data.guides.forEach(g=>{
-    let pub=0,pend=0;
-    g.subGroups.forEach(sg=>sg.items.forEach(it=>{if(it.status==='已发布')pub++;else pend++;}));
-    const card=document.createElement('div');card.className='guide-card';
-    let html=`<div class="guide-title"><span>${g.emoji}</span><span>${g.title}</span></div><div class="guide-stats"><div class="guide-stat"><strong>${pub}</strong>已发布</div><div class="guide-stat"><strong>${pend}</strong>待发布</div></div>`;
-    g.subGroups.forEach(sg=>{
-      if(sg.label)html+=`<div class="guide-sub-label">${sg.label}</div>`;
-      sg.items.forEach(item=>{
-        const lh=item.link?`<a class="media-link-chip" href="${item.link}" target="_blank">↗</a>`:'';
-        html+=`<div class="guide-item"><div class="guide-item-left"><span class="guide-item-name">${item.name}</span>${lh}</div>${makeTag(item.status)}</div>`;
-      });
-    });
-    card.innerHTML=html;grid.appendChild(card);
-  });
-}
-
-function renderPRTimes(){
-  const tb=document.getElementById('jp-prtimes-tbody');tb.innerHTML='';
-  data.prtimes.forEach(r=>{
-    const tr=document.createElement('tr');
-    tr.className=r.status==='已发布'?'row-published':'row-pending';
-    tr.innerHTML=`<td><span class="pr-time">${r.time}</span></td><td><span class="pr-title">${r.title}</span></td><td><span class="pr-product">${r.product}</span></td><td>${makeTag(r.status)}</td>`;
-    tb.appendChild(tr);
-  });
-}
-function switchRegion(region){
-  ['weekly','pm','global','japan'].forEach(key=>{
-    document.getElementById('view-'+key).classList.toggle('view-hidden',region!==key);
-  });
-  document.querySelectorAll('.tab-btn').forEach(btn=>{
-    btn.classList.toggle('active',btn.getAttribute('onclick').includes("'"+region+"'")||btn.getAttribute('onclick').includes('&#39;'+region+'&#39;'));
-  });
-}
-window.addEventListener('DOMContentLoaded',()=>{
-  renderProducts();renderGuides();renderPRTimes();switchRegion('weekly');
-});
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+ document.getElementById(btn.dataset.tab).classList.remove('hidden');
+}));
+render();
 </script>
 
 
