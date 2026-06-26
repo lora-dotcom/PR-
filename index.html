@@ -422,9 +422,21 @@
 
     .code-count {
       font-family: "Consolas", "SFMono-Regular", monospace;
-      font-size: 34px;
+      font-size: 28px;
       color: var(--green);
       line-height: 1;
+      white-space: nowrap;
+    }
+
+    .code-prev {
+      color: var(--soft);
+      font-size: 20px;
+    }
+
+    .code-arrow {
+      color: var(--amber);
+      font-size: 20px;
+      padding: 0 6px;
     }
 
     .note {
@@ -432,12 +444,7 @@
       color: var(--muted);
       font-size: 15px;
     }
-
-    .released tr.pm01s-row td { background: #fff0bf; }
-    .released tr.pm02-row td { background: #fff9e8; }
-    .released tr.pf-row td { background: #eef6fb; }
-    .released tr.multi-row td { background: #f4eff9; }
-    .released tr:hover td { filter: brightness(.985); }
+    .released tr:hover td { background: var(--panel-2); }
 
     .next-grid {
       display: grid;
@@ -522,22 +529,22 @@
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-number">8</div>
+          <div class="stat-number">10</div>
           <div class="stat-label">新增发布</div>
-          <div class="stat-note">PM01S / 世界杯定制款 / PM02</div>
+          <div class="stat-note">媒体报道 8 篇 + 新闻稿 2 篇</div>
         </div>
         <div class="stat">
           <div class="stat-number">3</div>
           <div class="stat-label">新增媒体</div>
-          <div class="stat-note">本轮不展开具体新增清单</div>
+          <div class="stat-note">含 Good Housekeeping / TalkAndroid</div>
         </div>
         <div class="stat">
-          <div class="stat-number">111</div>
+          <div class="stat-number">118</div>
           <div class="stat-label">折扣码使用</div>
           <div class="stat-note">新闻稿渠道与 Yanko 为主</div>
         </div>
         <div class="stat">
-          <div class="stat-number">≈140K+</div>
+          <div class="stat-number">≈540K+</div>
           <div class="stat-label">预估媒体曝光</div>
           <div class="stat-note">不含新闻稿转载总曝光</div>
         </div>
@@ -546,20 +553,20 @@
       <div class="summary">
         <div class="takeaway">
           <h2>阶段结论</h2>
-          <p>PM01S 已从首发声量进入第二轮媒体扩散。结合折扣码数据，Yanko Design 是本阶段最完整的合作样本：付费专题内容、多渠道分发和专属码使用形成了清晰链路。PF01 出现 Athlon Sports 自发报道，世界杯定制款则进入待发布资源池。</p>
+          <ul class="takeaway-list"><li>WIRED 风扇指南覆盖 UH01、PM01S、PF01、PH01，其中 UH01 被列为最佳腰扇，PM01S 被列为最佳手持喷雾风扇，PF01 被列为最佳无叶风扇；该类权威媒体报道可作为后续内容素材及媒体建联背书。</li><li>Good Housekeeping、The Gadgeteer、Wanderous Affair、Burlap and Blue 等指南 / 评测内容补充了夏季降温、旅行、海滩和礼品场景下的多产品露出。</li><li>会员日促销新闻稿发布后获得 TalkAndroid 主动转载，后续促销内容可继续分发给导购 / Deals 类媒体。</li></ul>
         </div>
         <div class="key-points">
           <div class="point">
             <strong>转化主力</strong>
-            <span>新闻稿渠道 58 次，Yanko Design 50 次，两者合计 108 次。</span>
+            <span>新闻稿渠道 61 次，Yanko Design 54 次，两者仍是主要折扣码使用来源。</span>
           </div>
           <div class="point">
-            <strong>归因边界</strong>
-            <span>折扣码数据仅覆盖已配置追踪码的媒体，不用于判断未配码媒体的转化弱。</span>
+            <strong>媒体资源</strong>
+            <span>本周期新增 Independent 与 Good Housekeeping 两个 PM01S 顶级媒体资源，目前处于维护推进阶段。</span>
           </div>
           <div class="point">
-            <strong>下一阶段</strong>
-            <span>亚马逊会员日推广，新闻稿已准备，用于承接前期声量。</span>
+            <strong>后续方向</strong>
+            <span>复用 WIRED 等权威媒体内容，继续维护高权重资源与导购 / Deals 类媒体关系。</span>
           </div>
         </div>
       </div>
@@ -567,16 +574,16 @@
       <div class="section-title">内容发布进展</div>
       <div class="cards">
         <article class="card pm01s">
-          <h3>PM01S 全球热浪主题</h3>
-          <p>6/10 发布，从 El Niño 与全球高温频发切入，强化 PM01S “个人冷却需求”的产品认知。</p>
+          <h3>WIRED 风扇指南</h3>
+          <p>UH01 最佳腰扇、PM01S 最佳手持喷雾风扇、PF01 最佳无叶风扇。</p>
         </article>
         <article class="card worldcup">
-          <h3>世界杯定制款主题</h3>
-          <p>6/15 发布，结合夏季观赛、户外高温和球迷场景，为后续待发布媒体资源提供内容素材。</p>
+          <h3>会员日新闻稿</h3>
+          <p>6/22 发布 Prime Day 便携降温促销主题稿，并获得 TalkAndroid 转载，该媒体已建联，后续可继续合作促销活动。</p>
         </article>
         <article class="card pm02">
-          <h3>PM02 即时冷感主题</h3>
-          <p>6/18 规划发布，重点突出 PM02 与普通风扇的差异，强化“不是吹热风，而是制造即时冷感”。</p>
+          <h3>Cold Air 系列稿</h3>
+          <p>6/25 发布 Cold Air 系列三款便携降温选择主题稿，继续承接高温场景下的产品教育。</p>
         </article>
       </div>
 
@@ -596,225 +603,145 @@
           </thead>
           <tbody id="releasedRows">
       <tr class="pm01s-row">
-        <td>2026-6-8</td>
-        <td><span class="tag pm01s">PM01S</span></td>
-        <td><a class="media" href="https://www.yankodesign.com/2026/06/08/the-personal-cooling-device-that-blows-cold-air-rather-than-just-moving-it/" target="_blank">Yanko Design</a></td>
-        <td><span class="uv hot">3.1M</span></td>
-        <td><span class="desc">独立产品专题，解释 PM01S 与普通风扇的差异</span></td>
-        <td>≈46.5K</td>
-        <td><a class="link" href="https://www.yankodesign.com/2026/06/08/the-personal-cooling-device-that-blows-cold-air-rather-than-just-moving-it/" target="_blank">打开</a></td>
+        <td>6/16</td>
+        <td><span class="tag pm01s">UH01 / PM01S / PF01 / PH01</span></td>
+        <td><a class="media" href="https://www.wired.com/gallery/best-handheld-fans/" target="_blank">WIRED</a></td>
+        <td><span class="uv hot">24M</span></td>
+        <td><span class="desc">风扇指南，UH01 最佳腰扇 / PM01S 最佳手持喷雾风扇 / PF01 最佳无叶风扇</span></td>
+        <td>≈172.8K</td>
+        <td><a class="link" href="https://www.wired.com/gallery/best-handheld-fans/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="pf-row">
+        <td>6/20</td>
+        <td><span class="tag pf">PF04</span></td>
+        <td><a class="media" href="https://the-gadgeteer.com/" target="_blank">The Gadgeteer</a></td>
+        <td><span class="uv hot">1M</span></td>
+        <td><span class="desc">AirGimbal 独立评测，聚焦可调角度与便携使用</span></td>
+        <td>≈18K</td>
+        <td><a class="link" href="https://the-gadgeteer.com/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="multi-row">
+        <td>6/22</td>
+        <td><span class="tag multi">NK01</span></td>
+        <td><a class="media" href="https://the-gadgeteer.com/2026/06/22/best-beach-gadgets-2026-6-essentials-for-a-stress-free-day/" target="_blank">The Gadgeteer</a></td>
+        <td><span class="uv hot">1M</span></td>
+        <td><span class="desc">Best Beach Gadgets 2026 海滩装备指南</span></td>
+        <td>≈13.5K</td>
+        <td><a class="link" href="https://the-gadgeteer.com/2026/06/22/best-beach-gadgets-2026-6-essentials-for-a-stress-free-day/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="multi-row">
+        <td>6/23</td>
+        <td><span class="tag multi">PE01</span></td>
+        <td><a class="media" href="https://www.goodhousekeeping.com/uk/product-reviews/house-garden/g71673087/best-amazon-prime-fan-deals-2026/" target="_blank">Good Housekeeping</a></td>
+        <td><span class="uv hot">26.8M</span></td>
+        <td><span class="desc">Amazon £100 以下风扇导购，PE01 获得推荐</span></td>
+        <td>≈193K</td>
+        <td><a class="link" href="https://www.goodhousekeeping.com/uk/product-reviews/house-garden/g71673087/best-amazon-prime-fan-deals-2026/" target="_blank">打开</a></td>
       </tr>
     
       <tr class="pm01s-row">
-        <td>2026-6-14</td>
-        <td><span class="tag pm01s">PM01S</span></td>
-        <td><a class="media" href="https://techbuzzireland.com/2026/06/14/aecooly-cold-air-ultra-delivers-18f-cooling-in-10-seconds/" target="_blank">TechBuzz Ireland</a></td>
-        <td><span class="uv">49.8K</span></td>
-        <td><span class="desc">新闻稿转载，深度评测待发布</span></td>
-        <td>≈1.2K</td>
-        <td><a class="link" href="https://techbuzzireland.com/2026/06/14/aecooly-cold-air-ultra-delivers-18f-cooling-in-10-seconds/" target="_blank">打开</a></td>
-      </tr>
-    
-      <tr class="pm01s-row">
-        <td>2026-6-17</td>
-        <td><span class="tag pm01s">PM01S</span></td>
-        <td><a class="media" href="https://cine-techno.com/wp/2026/06/16/presentation-unboxing-du-aecooly-cold-air-pro-le-climatiseur-de-poche-personnel/" target="_blank">Cine-Techno</a></td>
-        <td><span class="uv">6.7K</span></td>
-        <td><span class="desc">法语开箱介绍，补充小语种覆盖</span></td>
-        <td>≈0.6K</td>
-        <td><a class="link" href="https://cine-techno.com/wp/2026/06/16/presentation-unboxing-du-aecooly-cold-air-pro-le-climatiseur-de-poche-personnel/" target="_blank">打开</a></td>
-      </tr>
-    
-      <tr class="pm01s-row">
-        <td>2026-6-16</td>
+        <td>6/23</td>
         <td><span class="tag pm01s">PM01</span></td>
-        <td><a class="media" href="https://www.iambrownstyle.com/the-ultimate-fathers-gift-guide/" target="_blank">iambrownstyle</a></td>
-        <td><span class="uv">7.5K</span></td>
-        <td><span class="desc">父亲节礼品指南</span></td>
-        <td>≈0.5K</td>
-        <td><a class="link" href="https://www.iambrownstyle.com/the-ultimate-fathers-gift-guide/" target="_blank">打开</a></td>
+        <td><a class="media" href="https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro" target="_blank">Burlap and Blue</a></td>
+        <td><span class="uv">33.9K</span></td>
+        <td><span class="desc">Summer Gift Guide 2026</span></td>
+        <td>≈1.8K</td>
+        <td><a class="link" href="https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro" target="_blank">打开</a></td>
       </tr>
     
-      <tr class="pm02-row">
-        <td>2026-6-8</td>
-        <td><span class="tag pm02">PM02</span></td>
-        <td><a class="media" href="https://joyfilledeats.com/gifts-for-dad/" target="_blank">Joy Filled Eats</a></td>
-        <td><span class="uv">248.7K</span></td>
-        <td><span class="desc">父亲节礼品指南</span></td>
-        <td>≈9.0K</td>
-        <td><a class="link" href="https://joyfilledeats.com/gifts-for-dad/" target="_blank">打开</a></td>
+      <tr class="multi-row">
+        <td>6/19</td>
+        <td><span class="tag multi">PM01 / PK01 / TB01 / UH01</span></td>
+        <td><a class="media" href="https://www.wanderousaffair.com/post/must-pack-summer-travel-products" target="_blank">Wanderous Affair</a></td>
+        <td><span class="uv">24K</span></td>
+        <td><span class="desc">夏季旅行必备产品指南</span></td>
+        <td>≈1.3K</td>
+        <td><a class="link" href="https://www.wanderousaffair.com/post/must-pack-summer-travel-products" target="_blank">打开</a></td>
       </tr>
     
-      <tr class="pm02-row">
-        <td>2026-6-15</td>
-        <td><span class="tag pm02">PM02 / PF01</span></td>
-        <td><a class="media" href="https://metropolitanmama.net/ready-for-summer-2026/" target="_blank">Metropolitan Mama</a></td>
-        <td><span class="uv">6.8K</span></td>
-        <td><span class="desc">夏季产品指南</span></td>
-        <td>≈0.5K</td>
-        <td><a class="link" href="https://metropolitanmama.net/ready-for-summer-2026/" target="_blank">打开</a></td>
+      <tr class="multi-row">
+        <td>6/23</td>
+        <td><span class="tag multi">PM 系列</span></td>
+        <td><a class="media" href="https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/" target="_blank">TalkAndroid</a></td>
+        <td><span class="uv">434K</span></td>
+        <td><span class="desc">会员日促销转载，Misting Fans 最高 20% off</span></td>
+        <td>≈10.4K</td>
+        <td><a class="link" href="https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/" target="_blank">打开</a></td>
       </tr>
     
-      <tr class="pf-row">
-        <td>2026-6-9</td>
-        <td><span class="tag pf">PF04 / NK01</span></td>
-        <td><a class="media" href="https://the-gadgeteer.com/2026/06/09/best-cooling-gadgets-june-heatwave-2026/" target="_blank">The Gadgeteer</a></td>
-        <td><span class="uv">455.1K</span></td>
-        <td><span class="desc">6 月热浪降温小工具推荐</span></td>
-        <td>≈16.4K</td>
-        <td><a class="link" href="https://the-gadgeteer.com/2026/06/09/best-cooling-gadgets-june-heatwave-2026/" target="_blank">打开</a></td>
+      <tr class="multi-row">
+        <td>6/25</td>
+        <td><span class="tag multi">TB01</span></td>
+        <td><a class="media" href="https://games.gg/news/aecooly-table-fan-chic-01-review-2026/" target="_blank">GAMES.GG</a></td>
+        <td><span class="uv hot">7.1M</span></td>
+        <td><span class="desc">TB01 / Chic 01 深度评测，评分 4.9/5</span></td>
+        <td>≈127.8K</td>
+        <td><a class="link" href="https://games.gg/news/aecooly-table-fan-chic-01-review-2026/" target="_blank">打开</a></td>
       </tr>
     
-      <tr class="pf-row">
-        <td>2026-6</td>
-        <td><span class="tag pf">PF01</span></td>
-        <td><a class="media" href="https://athlonsports.com/deals/aecooly-slim-portable-handheld-fan-amazon-sale" target="_blank">Athlon Sports</a></td>
-        <td><span class="uv hot">7.4M</span></td>
-        <td><span class="desc">自发 Deals 报道，PF01 自然扩散信号</span></td>
-        <td>≈66.6K</td>
-        <td><a class="link" href="https://athlonsports.com/deals/aecooly-slim-portable-handheld-fan-amazon-sale" target="_blank">打开</a></td>
+      <tr class="multi-row">
+        <td>6/22</td>
+        <td><span class="tag multi">PM 系列</span></td>
+        <td><a class="media" href="https://www.einpresswire.com/article/921255958/aecooly-prime-day-portable-cooling-deals-go-live-as-summer-heat-peaks" target="_blank">EIN Presswire</a></td>
+        <td><span class="uv">-</span></td>
+        <td><span class="desc">Aecooly Prime Day Portable Cooling Deals Go Live as Summer Heat Peaks</span></td>
+        <td>-</td>
+        <td><a class="link" href="https://www.einpresswire.com/article/921255958/aecooly-prime-day-portable-cooling-deals-go-live-as-summer-heat-peaks" target="_blank">打开</a></td>
       </tr>
     
-      <tr class="pm02-row">
-        <td>2026-6-14</td>
-        <td><span class="tag pm02">PK01 / NK01 / PM02</span></td>
-        <td><a class="media" href="https://www.ictvesti.com/isprobali-smo-aecooly-ventilatore-koji-model-je-najbolji-za-letnje-osvezenje/" target="_blank">小语种内容分发</a></td>
-        <td><span class="uv">1K×5</span></td>
-        <td><span class="desc">同一小型 blog 编辑合作，5 篇区域内容覆盖</span></td>
-        <td>≈0.4K</td>
-        <td><a class="link" href="https://www.ictvesti.com/isprobali-smo-aecooly-ventilatore-koji-model-je-najbolji-za-letnje-osvezenje/" target="_blank">打开</a></td>
+      <tr class="multi-row">
+        <td>6/25</td>
+        <td><span class="tag multi">Cold Air 系列</span></td>
+        <td><a class="media" href="https://www.einpresswire.com/article/922092298/aecooly-cold-air-series-brings-three-portable-cooling-options-to-summer-heat" target="_blank">EIN Presswire</a></td>
+        <td><span class="uv">-</span></td>
+        <td><span class="desc">Aecooly Cold Air Series Brings Three Portable Cooling Options to Summer Heat</span></td>
+        <td>-</td>
+        <td><a class="link" href="https://www.einpresswire.com/article/922092298/aecooly-cold-air-series-brings-three-portable-cooling-options-to-summer-heat" target="_blank">打开</a></td>
       </tr>
     </tbody>
         </table>
       </div>
-
-      <div class="section-title">Yanko Design 付费合作复盘</div>
-      <div class="yanko">
-        <div class="yanko-main">
-          <h2>内容解释 + 多渠道分发 + 转化验证</h2>
-          <p>Yanko Design 是本阶段 PM01S 的重点付费合作媒体。专题内容从“不是单纯移动热空气，而是真正提供冷感”切入，较好承接 PM01S 的产品差异，并通过两波分发扩大触达。</p>
-          <div class="timeline">
-            <div class="event">
-              <time>6/8</time>
-              <div>PM01S 专题内容发布，并在 Newsletter、Facebook、LinkedIn、Flipboard 进行第一波推送。</div>
-            </div>
-            <div class="event">
-              <time>6/15</time>
-              <div>Instagram 第二波推广上线，继续承接 PM01S 认知与折扣码使用。</div>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-pad">
-          <h3>合作效果</h3>
-          <div class="code-card">
-            <div>
-              <div class="code-source">Yanko Design 专属码</div>
-              <div class="code-name">YANKO2026</div>
-            </div>
-            <div class="code-count">50</div>
-          </div>
-          <p class="note">在已配置独立追踪码的媒体中，Yanko Design 目前表现最突出。它不是单纯曝光媒体，而是具备可复盘的完整合作链路。</p>
-          <p class="note"><a href="https://www.yankodesign.com/2026/06/08/the-personal-cooling-device-that-blows-cold-air-rather-than-just-moving-it/" target="_blank">专题内容</a> · <a href="https://www.instagram.com/p/DZnOKUsjEnh/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==" target="_blank">Instagram 推广</a></p>
-        </div>
-      </div>
-
       <div class="section-title">折扣码使用反馈</div>
       <div class="panel panel-pad">
-        <div class="conversion-grid" id="codeRows">
-      <div class="code-card">
-        <div>
-          <div class="code-source">新闻稿渠道</div>
-          <div class="code-name">STAYCOOL20</div>
-        </div>
-        <div class="code-count">58</div>
-      </div>
-    
-      <div class="code-card">
-        <div>
-          <div class="code-source">Yanko Design</div>
-          <div class="code-name">YANKO2026</div>
-        </div>
-        <div class="code-count">50</div>
-      </div>
-    
-      <div class="code-card">
-        <div>
-          <div class="code-source">The Inspiration Grid</div>
-          <div class="code-name">INSP2026</div>
-        </div>
-        <div class="code-count">1</div>
-      </div>
-    
-      <div class="code-card">
-        <div>
-          <div class="code-source">GadgetMatch</div>
-          <div class="code-name">GMATCH20</div>
-        </div>
-        <div class="code-count">2</div>
-      </div>
-    </div>
+        <div class="panel" style="box-shadow:none;margin-bottom:0"><table><thead><tr><th>来源</th><th>折扣码</th><th>上期</th><th>本期</th><th>变化</th></tr></thead><tbody id="codeRows">
+        <tr>
+          <td><span class="media">新闻稿渠道</span></td>
+          <td><span class="code-name">STAYCOOL20</span></td>
+          <td>58</td>
+          <td>61</td>
+          <td>+3</td>
+        </tr>
+      
+        <tr>
+          <td><span class="media">Yanko Design</span></td>
+          <td><span class="code-name">YANKO2026</span></td>
+          <td>50</td>
+          <td>54</td>
+          <td>+4</td>
+        </tr>
+      
+        <tr>
+          <td><span class="media">The Inspiration Grid</span></td>
+          <td><span class="code-name">INSP2026</span></td>
+          <td>1</td>
+          <td>1</td>
+          <td>-</td>
+        </tr>
+      
+        <tr>
+          <td><span class="media">GadgetMatch</span></td>
+          <td><span class="code-name">GMATCH20</span></td>
+          <td>2</td>
+          <td>2</td>
+          <td>-</td>
+        </tr>
+      </tbody></table></div>
         <p class="note">说明：当前折扣码数据仅覆盖已配置独立追踪码的媒体与新闻稿渠道。其他 PM01S 已发布媒体未全部配置独立码，因此暂不以折扣码使用量直接判断其转化能力。</p>
       </div>
 
-      <div class="section-title">世界杯定制款待发布资源</div>
-      <div class="panel">
-        <table>
-          <thead>
-            <tr>
-              <th>媒体 / 编辑</th>
-              <th>月访问量</th>
-              <th>内容方向</th>
-              <th>当前状态</th>
-              <th>链接</th>
-            </tr>
-          </thead>
-          <tbody id="worldcupRows">
-      <tr>
-        <td><a class="media" href="https://eastendtaste.com/" target="_blank">East End Taste</a></td>
-        <td><span class="uv">2.9K</span></td>
-        <td><span class="desc">世界杯必备指南</span></td>
-        <td>已寄样，待发布</td>
-        <td><a class="link" href="https://eastendtaste.com/" target="_blank">打开</a></td>
-      </tr>
-    
-      <tr>
-        <td><a class="media" href="https://gamedaily.com/" target="_blank">GameDaily</a></td>
-        <td><span class="uv">165K</span></td>
-        <td><span class="desc">7 月科技小工具指南</span></td>
-        <td>已寄样，待发布</td>
-        <td><a class="link" href="https://gamedaily.com/" target="_blank">打开</a></td>
-      </tr>
-    
-      <tr>
-        <td><a class="media" href="https://www.wired.com/" target="_blank">WIRED</a></td>
-        <td><span class="uv hot">14.9M</span></td>
-        <td><span class="desc">7 月风扇指南</span></td>
-        <td>已寄样 / 待发布</td>
-        <td><a class="link" href="https://www.wired.com/" target="_blank">打开</a></td>
-      </tr>
-    
-      <tr>
-        <td><a class="media" href="file:///C:/Users/deone/Documents/Codex/2026-05-29/1/Aecooly_PR_Weekly_0615_Dashboard/index.html#" target="_blank">Jon Cohen</a></td>
-        <td><span class="uv">-</span></td>
-        <td><span class="desc">Summer tech gadgets article</span></td>
-        <td>世界杯定制款已寄出，待编辑排期</td>
-        <td><span class="tag gray">待补充</span></td>
-      </tr>
-    </tbody>
-        </table>
-      </div>
-
-      <div class="section-title">下一步动作</div>
-      <div class="next-grid">
-        <div class="next">
-          <strong>亚马逊会员日推广</strong>
-          <span>新闻稿已准备，下一阶段用于承接前期 PM01S 声量与折扣码反馈。</span>
-        </div>
-        <div class="next">
-          <strong>PM 系列内容承接</strong>
-          <span>官网 Blog 继续围绕产品卖点、媒体反馈和高温场景做内容沉淀，不涉及折扣码表达。</span>
-        </div>
-      </div>
     </section>
 
     <section id="pm" class="view hidden">
@@ -828,22 +755,22 @@
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-number">41+</div>
+          <div class="stat-number">45+</div>
           <div class="stat-label">PM 系列资源</div>
           <div class="stat-note">已发布与待发布合并统计</div>
         </div>
         <div class="stat">
-          <div class="stat-number">18+</div>
+          <div class="stat-number">22+</div>
           <div class="stat-label">已发布内容</div>
           <div class="stat-note">PM01S 优先展示，PM02 持续补充</div>
         </div>
         <div class="stat">
-          <div class="stat-number">20+</div>
+          <div class="stat-number">23+</div>
           <div class="stat-label">待发布资源</div>
           <div class="stat-note">科技、设计、生活方式媒体</div>
         </div>
         <div class="stat">
-          <div class="stat-number">111</div>
+          <div class="stat-number">118</div>
           <div class="stat-label">折扣码使用</div>
           <div class="stat-note">PM01S 为主要归因产品</div>
         </div>
@@ -858,10 +785,6 @@
         <article class="card pm02">
           <h3>PM02</h3>
           <p>适合夏季指南、父亲节礼品、户外降温和生活方式内容。更偏场景推荐和实用好物表达。</p>
-        </article>
-        <article class="card worldcup">
-          <h3>世界杯定制款</h3>
-          <p>适合观赛、户外、夏季科技小工具和风扇指南。当前重点是待发布资源储备。</p>
         </article>
       </div>
 
@@ -880,6 +803,46 @@
             </tr>
           </thead>
           <tbody id="pmRows">
+      <tr class="pm01s-row">
+        <td>6/16</td>
+        <td><span class="tag pm01s">PM01S / UH01 / PF01 / PH01</span></td>
+        <td><a class="media" href="https://www.wired.com/gallery/best-handheld-fans/" target="_blank">WIRED</a></td>
+        <td><span class="uv hot">24M</span></td>
+        <td><span class="desc">The Best Handheld and Wearable Fans for People Who Hate Being Sweaty（UH01 / PM01S / PF01 推荐）</span></td>
+        <td>EN</td>
+        <td><a class="link" href="https://www.wired.com/gallery/best-handheld-fans/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="multi-row">
+        <td>6/19</td>
+        <td><span class="tag multi">PM01 / PK01 / TB01 / UH01</span></td>
+        <td><a class="media" href="https://www.wanderousaffair.com/post/must-pack-summer-travel-products" target="_blank">Wanderous Affair</a></td>
+        <td><span class="uv">24K</span></td>
+        <td><span class="desc">Must-Pack Summer Travel Products for Warm Weather Trips</span></td>
+        <td>EN</td>
+        <td><a class="link" href="https://www.wanderousaffair.com/post/must-pack-summer-travel-products" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="pm01s-row">
+        <td>6/23</td>
+        <td><span class="tag pm01s">PM01</span></td>
+        <td><a class="media" href="https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro" target="_blank">Burlap and Blue</a></td>
+        <td><span class="uv">33.9K</span></td>
+        <td><span class="desc">Summer Gift Guide 2026</span></td>
+        <td>EN</td>
+        <td><a class="link" href="https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr class="multi-row">
+        <td>6/23</td>
+        <td><span class="tag multi">PM 系列</span></td>
+        <td><a class="media" href="https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/" target="_blank">TalkAndroid</a></td>
+        <td><span class="uv">434K</span></td>
+        <td><span class="desc">Aecooly Prime Day Cooling Deal（会员日促销媒体转载）</span></td>
+        <td>EN</td>
+        <td><a class="link" href="https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/" target="_blank">打开</a></td>
+      </tr>
+    
       <tr class="pm01s-row">
         <td>2026-6-8</td>
         <td><span class="tag pm01s">PM01S</span></td>
@@ -914,7 +877,7 @@
         <td>2026-6-1</td>
         <td><span class="tag pm01s">PM01S</span></td>
         <td><a class="media" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/" target="_blank">GAMES.GG</a></td>
-        <td><span class="uv hot">10.9M</span></td>
+        <td><span class="uv hot">7.7M</span></td>
         <td><span class="desc">Aecooly Cold Air Ultra Review 2026</span></td>
         <td>EN</td>
         <td><a class="link" href="https://games.gg/news/aecooly-cold-air-ultra-review-2026/" target="_blank">打开</a></td>
@@ -1096,12 +1059,21 @@
       </tr>
     
       <tr>
-        <td><a class="media" href="https://www.wired.com/" target="_blank">WIRED</a></td>
+        <td><a class="media" href="https://www.independent.co.uk/" target="_blank">The Independent</a></td>
         <td><span class="tag pm01s">PM01S</span></td>
-        <td><span class="uv hot">14.9M</span></td>
-        <td><span class="desc">7 月风扇指南相关资源，可承接 PM01S / 定制款方向</span></td>
-        <td><span class="tag gray">待发布</span></td>
-        <td><a class="link" href="https://www.wired.com/" target="_blank">打开</a></td>
+        <td><span class="uv hot">57.8M</span></td>
+        <td><span class="desc">顶级综合媒体资源，围绕夏季降温 / 导购内容方向维护推进</span></td>
+        <td><span class="tag gray">维护推进中</span></td>
+        <td><a class="link" href="https://www.independent.co.uk/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr>
+        <td><a class="media" href="https://www.goodhousekeeping.com/" target="_blank">Good Housekeeping</a></td>
+        <td><span class="tag pm01s">PM01S</span></td>
+        <td><span class="uv hot">25.8M</span></td>
+        <td><span class="desc">顶级生活方式媒体资源，围绕家庭生活 / 夏季好物方向维护推进</span></td>
+        <td><span class="tag gray">维护推进中</span></td>
+        <td><a class="link" href="https://www.goodhousekeeping.com/" target="_blank">打开</a></td>
       </tr>
     
       <tr>
@@ -1249,6 +1221,15 @@
       </tr>
     
       <tr>
+        <td><a class="media" href="https://techfortravel.co.uk/" target="_blank">techfortravel.co.uk</a></td>
+        <td><span class="tag multi">PM 系列</span></td>
+        <td><span class="uv">5.2K</span></td>
+        <td><span class="desc">旅行科技媒体资源</span></td>
+        <td><span class="tag gray">待发布</span></td>
+        <td><a class="link" href="https://techfortravel.co.uk/" target="_blank">打开</a></td>
+      </tr>
+    
+      <tr>
         <td><a class="media" href="https://productreviewcafe.com/" target="_blank">Product Review Cafe</a></td>
         <td><span class="tag pm02">PM02</span></td>
         <td><span class="uv">3.1K</span></td>
@@ -1284,22 +1265,23 @@
 
   <script>
     const released = [
-      ["2026-6-8", "PM01S", "Yanko Design", "3.1M", "独立产品专题，解释 PM01S 与普通风扇的差异", "≈46.5K", "https://www.yankodesign.com/2026/06/08/the-personal-cooling-device-that-blows-cold-air-rather-than-just-moving-it/"],
-      ["2026-6-14", "PM01S", "TechBuzz Ireland", "49.8K", "新闻稿转载，深度评测待发布", "≈1.2K", "https://techbuzzireland.com/2026/06/14/aecooly-cold-air-ultra-delivers-18f-cooling-in-10-seconds/"],
-      ["2026-6-17", "PM01S", "Cine-Techno", "6.7K", "法语开箱介绍，补充小语种覆盖", "≈0.6K", "https://cine-techno.com/wp/2026/06/16/presentation-unboxing-du-aecooly-cold-air-pro-le-climatiseur-de-poche-personnel/"],
-      ["2026-6-16", "PM01", "iambrownstyle", "7.5K", "父亲节礼品指南", "≈0.5K", "https://www.iambrownstyle.com/the-ultimate-fathers-gift-guide/"],
-      ["2026-6-8", "PM02", "Joy Filled Eats", "248.7K", "父亲节礼品指南", "≈9.0K", "https://joyfilledeats.com/gifts-for-dad/"],
-      ["2026-6-15", "PM02 / PF01", "Metropolitan Mama", "6.8K", "夏季产品指南", "≈0.5K", "https://metropolitanmama.net/ready-for-summer-2026/"],
-      ["2026-6-9", "PF04 / NK01", "The Gadgeteer", "455.1K", "6 月热浪降温小工具推荐", "≈16.4K", "https://the-gadgeteer.com/2026/06/09/best-cooling-gadgets-june-heatwave-2026/"],
-      ["2026-6", "PF01", "Athlon Sports", "7.4M", "自发 Deals 报道，PF01 自然扩散信号", "≈66.6K", "https://athlonsports.com/deals/aecooly-slim-portable-handheld-fan-amazon-sale"],
-      ["2026-6-14", "PK01 / NK01 / PM02", "小语种内容分发", "1K×5", "同一小型 blog 编辑合作，5 篇区域内容覆盖", "≈0.4K", "https://www.ictvesti.com/isprobali-smo-aecooly-ventilatore-koji-model-je-najbolji-za-letnje-osvezenje/"]
+      ["6/16", "UH01 / PM01S / PF01 / PH01", "WIRED", "24M", "风扇指南，UH01 最佳腰扇 / PM01S 最佳手持喷雾风扇 / PF01 最佳无叶风扇", "≈172.8K", "https://www.wired.com/gallery/best-handheld-fans/"],
+      ["6/20", "PF04", "The Gadgeteer", "1M", "AirGimbal 独立评测，聚焦可调角度与便携使用", "≈18K", "https://the-gadgeteer.com/"],
+      ["6/22", "NK01", "The Gadgeteer", "1M", "Best Beach Gadgets 2026 海滩装备指南", "≈13.5K", "https://the-gadgeteer.com/2026/06/22/best-beach-gadgets-2026-6-essentials-for-a-stress-free-day/"],
+      ["6/23", "PE01", "Good Housekeeping", "26.8M", "Amazon £100 以下风扇导购，PE01 获得推荐", "≈193K", "https://www.goodhousekeeping.com/uk/product-reviews/house-garden/g71673087/best-amazon-prime-fan-deals-2026/"],
+      ["6/23", "PM01", "Burlap and Blue", "33.9K", "Summer Gift Guide 2026", "≈1.8K", "https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro"],
+      ["6/19", "PM01 / PK01 / TB01 / UH01", "Wanderous Affair", "24K", "夏季旅行必备产品指南", "≈1.3K", "https://www.wanderousaffair.com/post/must-pack-summer-travel-products"],
+      ["6/23", "PM 系列", "TalkAndroid", "434K", "会员日促销转载，Misting Fans 最高 20% off", "≈10.4K", "https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/"],
+      ["6/25", "TB01", "GAMES.GG", "7.1M", "TB01 / Chic 01 深度评测，评分 4.9/5", "≈127.8K", "https://games.gg/news/aecooly-table-fan-chic-01-review-2026/"],
+      ["6/22", "PM 系列", "EIN Presswire", "-", "Aecooly Prime Day Portable Cooling Deals Go Live as Summer Heat Peaks", "-", "https://www.einpresswire.com/article/921255958/aecooly-prime-day-portable-cooling-deals-go-live-as-summer-heat-peaks"],
+      ["6/25", "Cold Air 系列", "EIN Presswire", "-", "Aecooly Cold Air Series Brings Three Portable Cooling Options to Summer Heat", "-", "https://www.einpresswire.com/article/922092298/aecooly-cold-air-series-brings-three-portable-cooling-options-to-summer-heat"]
     ];
 
     const codes = [
-      ["新闻稿渠道", "STAYCOOL20", 58],
-      ["Yanko Design", "YANKO2026", 50],
-      ["The Inspiration Grid", "INSP2026", 1],
-      ["GadgetMatch", "GMATCH20", 2]
+      ["新闻稿渠道", "STAYCOOL20", 58, 61],
+      ["Yanko Design", "YANKO2026", 50, 54],
+      ["The Inspiration Grid", "INSP2026", 1, 1],
+      ["GadgetMatch", "GMATCH20", 2, 2]
     ];
 
     const worldcup = [
@@ -1310,10 +1292,14 @@
     ];
 
     const pmPublished = [
+      ["6/16", "PM01S / UH01 / PF01 / PH01", "WIRED", "24M", "The Best Handheld and Wearable Fans for People Who Hate Being Sweaty（UH01 / PM01S / PF01 推荐）", "EN", "https://www.wired.com/gallery/best-handheld-fans/"],
+      ["6/19", "PM01 / PK01 / TB01 / UH01", "Wanderous Affair", "24K", "Must-Pack Summer Travel Products for Warm Weather Trips", "EN", "https://www.wanderousaffair.com/post/must-pack-summer-travel-products"],
+      ["6/23", "PM01", "Burlap and Blue", "33.9K", "Summer Gift Guide 2026", "EN", "https://www.burlapandblue.com/summer-gift-guide-2026/#Aecooly_Cold_Air_Pro"],
+      ["6/23", "PM 系列", "TalkAndroid", "434K", "Aecooly Prime Day Cooling Deal（会员日促销媒体转载）", "EN", "https://www.talkandroid.com/527110-aecooly-prime-day-cooling-deal/"],
       ["2026-6-8", "PM01S", "Yanko Design", "3.1M", "The Personal Cooling Device That Blows Cold Air Rather Than Just Moving It", "EN", "https://www.yankodesign.com/2026/06/08/the-personal-cooling-device-that-blows-cold-air-rather-than-just-moving-it/"],
       ["2026-6-14", "PM01S", "TechBuzz Ireland", "49.8K", "Aecooly Cold Air Ultra: Delivers 18°F Cooling in 10 Seconds（新闻稿转载，深度评测待发布）", "EN", "https://techbuzzireland.com/2026/06/14/aecooly-cold-air-ultra-delivers-18f-cooling-in-10-seconds/"],
       ["2026-6-17", "PM01S", "Cine-Techno", "6.7K", "Présentation unboxing du Aecooly Cold Air Pro", "French", "https://cine-techno.com/wp/2026/06/16/presentation-unboxing-du-aecooly-cold-air-pro-le-climatiseur-de-poche-personnel/"],
-      ["2026-6-1", "PM01S", "GAMES.GG", "10.9M", "Aecooly Cold Air Ultra Review 2026", "EN", "https://games.gg/news/aecooly-cold-air-ultra-review-2026/"],
+      ["2026-6-1", "PM01S", "GAMES.GG", "7.7M", "Aecooly Cold Air Ultra Review 2026", "EN", "https://games.gg/news/aecooly-cold-air-ultra-review-2026/"],
       ["2026-6-2", "PM01S", "The Inspiration Grid", "116K", "Aecooly Launches Cold Air Ultra, A Pocket-Sized Cooling System for Summer Heat", "EN", "https://theinspirationgrid.com/editorial/aecooly-launches-cold-air-ultra-a-pocket-sized-cooling-system-for-summer-heat/"],
       ["2026-6-3", "PM01S", "GadgetMatch", "259K", "The Aecooly Cold Air Ultra can chill your skin in ten seconds", "EN", "https://www.gadgetmatch.com/aecooly-cold-air-ultra-launch/"],
       ["2026-6-3", "PM01S", "China Gadgets Reviews", "56K", "Aecooly Launches the Cold Air Ultra Personal Cooling System", "EN", "https://chinagadgetsreviews.com/aecooly-launches-the-cold-air-ultra-personal-cooling-system.html"],
@@ -1333,7 +1319,8 @@
     const pmResources = [
       ["Wirecutter", "PM01S", "636.3M", "高权重评测 / 导购资源，待进一步推进", "待发布", "https://www.nytimes.com/wirecutter/"],
       ["TomsGuide", "PM01S / PM02", "23.8M", "科技导购媒体，适合风扇 / 夏季装备内容", "待发布", "https://www.tomsguide.com/"],
-      ["WIRED", "PM01S", "14.9M", "7 月风扇指南相关资源，可承接 PM01S / 定制款方向", "待发布", "https://www.wired.com/"],
+      ["The Independent", "PM01S", "57.8M", "顶级综合媒体资源，围绕夏季降温 / 导购内容方向维护推进", "维护推进中", "https://www.independent.co.uk/"],
+      ["Good Housekeeping", "PM01S", "25.8M", "顶级生活方式媒体资源，围绕家庭生活 / 夏季好物方向维护推进", "维护推进中", "https://www.goodhousekeeping.com/"],
       ["TIME Magazine", "PM01S", "14.8M", "大众高权重媒体资源", "待发布", "https://time.com/"],
       ["Prevention", "PM01S", "7.6M", "健康 / 高温防护方向", "待发布", "https://www.prevention.com/"],
       ["SlashGear", "PM01S", "6.5M", "科技产品报道方向", "待发布", "https://www.slashgear.com/"],
@@ -1350,6 +1337,7 @@
       ["DNA Magazine", "PM02", "134.3K", "生活方式媒体资源", "待发布", "https://www.dnamagazine.com.au/"],
       ["GameDaily", "PM02", "165K", "7 月科技小工具指南资源", "待发布", "https://gamedaily.com/"],
       ["Maison et Domotique", "PM01", "64.7K", "西语 / 家居科技内容方向", "待发布", "https://www.maison-et-domotique.com/es/"],
+      ["techfortravel.co.uk", "PM 系列", "5.2K", "旅行科技媒体资源", "待发布", "https://techfortravel.co.uk/"],
       ["Product Review Cafe", "PM02", "3.1K", "小型评测 / 生活方式媒体", "待发布", "https://productreviewcafe.com/"]
     ];
 
@@ -1388,25 +1376,32 @@
       </tr>
     `).join("");
 
-    document.querySelector("#codeRows").innerHTML = codes.map(item => `
-      <div class="code-card">
-        <div>
-          <div class="code-source">${item[0]}</div>
-          <div class="code-name">${item[1]}</div>
-        </div>
-        <div class="code-count">${item[2]}</div>
-      </div>
-    `).join("");
+    document.querySelector("#codeRows").innerHTML = codes.map(item => {
+      const delta = item[3] - item[2];
+      const change = delta === 0 ? "-" : `+${delta}`;
+      return `
+        <tr>
+          <td><span class="media">${item[0]}</span></td>
+          <td><span class="code-name">${item[1]}</span></td>
+          <td>${item[2]}</td>
+          <td>${item[3]}</td>
+          <td>${change}</td>
+        </tr>
+      `;
+    }).join("");
 
-    document.querySelector("#worldcupRows").innerHTML = worldcup.map(item => `
-      <tr>
-        <td><a class="media" href="${item[4] || "#"}" target="_blank">${item[0]}</a></td>
-        <td>${uv(item[1])}</td>
-        <td><span class="desc">${item[2]}</span></td>
-        <td>${item[3]}</td>
-        <td>${link(item[4])}</td>
-      </tr>
-    `).join("");
+    const worldcupRows = document.querySelector("#worldcupRows");
+    if (worldcupRows) {
+      worldcupRows.innerHTML = worldcup.map(item => `
+        <tr>
+          <td><a class="media" href="${item[4] || "#"}" target="_blank">${item[0]}</a></td>
+          <td>${uv(item[1])}</td>
+          <td><span class="desc">${item[2]}</span></td>
+          <td>${item[3]}</td>
+          <td>${link(item[4])}</td>
+        </tr>
+      `).join("");
+    }
 
     document.querySelector("#pmRows").innerHTML = pmPublished.map(item => `
       <tr class="${rowClass(item[1])}">
@@ -1440,6 +1435,37 @@
       });
     });
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body></html>
